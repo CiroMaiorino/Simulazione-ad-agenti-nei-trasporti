@@ -375,9 +375,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68eeb281c0fb28946a3b7b56261046be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  movementTime: 5
+  movementSpeed: 0.5
+  movementTime: 3
   rotationAmount: 1
+  cameraTransform: {fileID: 963194228}
+  zoomAmount: {x: 0, y: -3, z: 3}
 --- !u!4 &826464533
 Transform:
   m_ObjectHideFlags: 0
@@ -469,13 +471,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: -0, y: 26.5, z: -5.4}
+  m_LocalRotation: {x: 0.19147064, y: -0, z: -0.00000006705521, w: 0.98149836}
+  m_LocalPosition: {x: -0, y: 9.1, z: -3.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 826464533}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 22.077, y: 0, z: 0}
 --- !u!1 &1079225443
 GameObject:
   m_ObjectHideFlags: 0
