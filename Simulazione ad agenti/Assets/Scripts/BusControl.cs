@@ -8,7 +8,6 @@ public class BusControl : MonoBehaviour {
     /// This is an example script for controlling the doors and signs on the bus. 
     /// You may wish to create a more specific implementation consistent with your game.
     /// </summary>
-
     public Animator Door1;
     public Animator Door2;
     public Animator StopSign1;
