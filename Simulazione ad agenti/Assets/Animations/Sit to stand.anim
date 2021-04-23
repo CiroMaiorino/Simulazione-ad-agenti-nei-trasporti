@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sit to Stand
+  m_Name: Sit to stand
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -31494,6 +31494,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 2.266667
         value: 2.1518142
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.8333333
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -63952,6 +63961,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 2.266667
         value: 2.1518142
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.8333333
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
