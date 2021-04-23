@@ -14,9 +14,8 @@ public class BusControl : MonoBehaviour {
     public Animator StopSign2;
     public Animator StopSign3;
     public Animator StopSign4;
-
     public float OpenCloseSpeed;
-
+    
     private bool isOpen = false;    
     
     public void Open(bool open = true) {

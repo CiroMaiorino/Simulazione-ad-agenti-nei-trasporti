@@ -11,9 +11,9 @@ public class CameraController : MonoBehaviour
     Vector3 newPosition;
     Vector3 dragStartPosition, dragCurrentPosition;
     Vector3 rotateStartPosition, rotateCurrentPosition;
-    
     Quaternion newRotation;
     // Start is called before the first frame update
+
     void Start()
     {
         newPosition=transform.position;    
