@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 4817916567249468591}
   - component: {fileID: 4817916567249468590}
   - component: {fileID: 4817916567249468589}
-  - component: {fileID: 4817916567249468585}
   m_Layer: 0
-  m_Name: LowPolyManPrefabA_
+  m_Name: LowPolyManPrefabAStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,26 +112,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &4817916567249468585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817916567249468588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46fb00c7e6ad9485282a146ad398a2a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  distance: 3
-  height: 3
-  damping: 5
-  smoothRotation: 1
-  followBehind: 1
-  rotationDamping: 10
-  staticOffset: 0
 --- !u!1001 &4817916565792536294
 PrefabInstance:
   m_ObjectHideFlags: 0
