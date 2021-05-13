@@ -22,6 +22,9 @@ public class Agent : MonoBehaviour
 
         if (!pullman.isMooving && pullman.freeTarget() != null)
             setDestination(pullman.freeTarget());
+        else
+            animator.SetBool("Waiting",true);
+
     }
 
     // Update is called once per frame
@@ -32,12 +35,10 @@ public class Agent : MonoBehaviour
             animator.SetBool("Waiting",true);
             transform.rotation =Quaternion.identity;
             animator.SetBool("Sit",true);
-            transform.parent=passengers.transform;
-            Destroy(GetComponentInChildren<Rigidbody>());
-            
+            transform.parent=passengers.transform;  
         }
         
-        }
+    }
 
     public void setDestination(Target t){
         destinationSetter.target=t.transform;
