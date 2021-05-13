@@ -3,35 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+/* This class represent the agent. */
 public class Agent : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /* Operate to set the destination of the agent.*/
     AIDestinationSetter destinationSetter;
-    public Pullman pullman;
+    /* Represents the Bus on the scene. */
+    public Bus bus;
+    /* Declaration of the animator to work on agent's animation. */
     private Animator animator;
+    /* Declaration of IAstarAI to use A* methods. */
     private IAstarAI ai;
+    /* Gameobject that contains all the passengers of the bus. */
     private GameObject passengers;
 
-    public float mammt=0f;
+    /* Start is called before the first frame update. */
     void Start()
     {
-        passengers = pullman.transform.Find("Passengers").gameObject;
+        /* Instance of objects Declared before. */
+        passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
-        animator = this.GetComponentInChildren<Animator>();
         ai = GetComponent<IAstarAI>();
-
-        if (!pullman.isMooving && pullman.freeTarget() != null)
-            setDestination(pullman.freeTarget());
+        /* Instance of the animator from the agent. */ 
+        animator = this.GetComponentInChildren<Animator>();
+        
+        /* If the bus is not moving and there are free seats the agetns will set
+         their target to one of the free seat. */
+        if (!bus.isMooving && bus.freeTarget() != null)
+            setDestination(bus.freeTarget());
         else
+        /* Change animation of the agents to waiting. */
             animator.SetBool("Waiting",true);
 
     }
 
-    // Update is called once per frame
+    /* Update is called once per frame*/
     void Update()
     {
+        /* When the agents arrive at the target change the animation to waiting
+         rotate him and make him sit. */
         if(ai.reachedDestination){
-            Debug.Log(ai.rotation);
             animator.SetBool("Waiting",true);
             transform.rotation =Quaternion.identity;
             animator.SetBool("Sit",true);
@@ -40,6 +51,7 @@ public class Agent : MonoBehaviour
         
     }
 
+    /* The method that set the target for the agents. */
     public void setDestination(Target t){
         destinationSetter.target=t.transform;
         t.isOccupied=true;

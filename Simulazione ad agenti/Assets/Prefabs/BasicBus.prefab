@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2388632908442054967}
   - component: {fileID: 1731841618113225034}
   m_Layer: 6
-  m_Name: MuroDestroConFinestre
+  m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5243,7 +5243,7 @@ GameObject:
   - component: {fileID: 9137139670472277601}
   - component: {fileID: 2448402213684134614}
   m_Layer: 6
-  m_Name: MuroDietroConFinestra
+  m_Name: BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6497,7 +6497,7 @@ GameObject:
   - component: {fileID: 8149464345543479447}
   - component: {fileID: 231413630975475301}
   m_Layer: 6
-  m_Name: MuroAvantiConFinestra
+  m_Name: FrontWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7779,7 +7779,7 @@ GameObject:
   - component: {fileID: 5540673224855598672}
   - component: {fileID: 4465123780754496754}
   m_Layer: 6
-  m_Name: MuroSinistroConFinestre
+  m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14074,7 +14074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7266510118496659591}
   m_Layer: 6
-  m_Name: Muri
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14113,7 +14113,7 @@ GameObject:
   - component: {fileID: 7266510118619483803}
   - component: {fileID: 7266510118619483802}
   m_Layer: 3
-  m_Name: RuotaD1
+  m_Name: BackWheel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14239,7 +14239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: 31ccf1887e8dbd01-c91dd68dda65c734
+  guid: 23b46f62e255669c-48b9b4d3061df68a
 --- !u!114 &7266510118655812685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14262,7 +14262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7266510118718584164}
   m_Layer: 0
-  m_Name: Ruote
+  m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14280,9 +14280,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7266510118619483801}
+  - {fileID: 7266510120008346589}
   - {fileID: 7266510120156608568}
   - {fileID: 7266510119870762880}
-  - {fileID: 7266510120008346589}
   m_Father: {fileID: 7266510118969851884}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14330,7 +14330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: f64e23c9f0c6c099-a3dbf006ec7919c4
+  guid: 18adab38d1e33b8c-f0433af3a7895da2
 --- !u!114 &7266510118886924754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14429,8 +14429,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7266510119057779469}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.2159996, y: 0.08499998, z: 8.279}
-  m_LocalScale: {x: 1.9165637, y: 1, z: 1}
+  m_LocalPosition: {x: 3.2159996, y: 0.101, z: 8.282}
+  m_LocalScale: {x: 2.1260443, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7266510118496659591}
   m_RootOrder: 5
@@ -14903,7 +14903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: 870ef1fc41c7fd33-1fa84793452ddff3
+  guid: ac4c5b44770c1f2d-fc281cf65e0301d9
 --- !u!114 &7266510119314574969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14960,7 +14960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: dd645dbbe2eef5de-442adf786fba976f
+  guid: f135e386f88f4287-4f2f0de505403db9
 --- !u!114 &7266510119406161602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15017,7 +15017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: a8cddb0f90a7c1ec-7d6208f6e9fc3fb1
+  guid: 300441a8b3d82cb2-85214ea837f837ee
 --- !u!114 &7266510119532791035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15044,7 +15044,7 @@ GameObject:
   - component: {fileID: 7266510119716485503}
   - component: {fileID: 7266510119634611666}
   m_Layer: 3
-  m_Name: Pavimento
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15386,7 +15386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: d5e8f801100e5970-140f9f3665d2ea99
+  guid: 4a694babb11f8d35-cbc6471a06be1aea
 --- !u!114 &7266510119843101567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15412,7 +15412,7 @@ GameObject:
   - component: {fileID: 7266510119870762882}
   - component: {fileID: 7266510119870762881}
   m_Layer: 6
-  m_Name: RuotaA2
+  m_Name: FrontWheel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15430,7 +15430,7 @@ Transform:
   m_LocalScale: {x: 0.86721593, y: 0.86721593, z: 0.86721593}
   m_Children: []
   m_Father: {fileID: 7266510118718584164}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7266510119870762883
 MeshFilter:
@@ -15504,7 +15504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7266510119987880123}
   m_Layer: 6
-  m_Name: Posti
+  m_Name: Seats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15546,7 +15546,7 @@ GameObject:
   - component: {fileID: 7266510120008346591}
   - component: {fileID: 7266510120008346590}
   m_Layer: 3
-  m_Name: RuotaD2
+  m_Name: BackWheel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15564,7 +15564,7 @@ Transform:
   m_LocalScale: {x: 0.86721593, y: 0.86721593, z: 0.86721593}
   m_Children: []
   m_Father: {fileID: 7266510118718584164}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7266510120008346584
 MeshFilter:
@@ -15641,7 +15641,7 @@ GameObject:
   - component: {fileID: 7266510120156608570}
   - component: {fileID: 7266510120156608569}
   m_Layer: 3
-  m_Name: RuotaA1
+  m_Name: FrontWheel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15659,7 +15659,7 @@ Transform:
   m_LocalScale: {x: 0.86721593, y: 0.86721593, z: 0.86721593}
   m_Children: []
   m_Father: {fileID: 7266510118718584164}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7266510120156608571
 MeshFilter:
@@ -15767,7 +15767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: 021017a0d259e8b4-66e67a607c304528
+  guid: 45537444c9acb3d1-6b48feeb4f0a5e3d
 --- !u!114 &7266510120222572912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15824,7 +15824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae7eb1d4ce49d38a1e38ee7efe7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: f3421ad11ffe3d34-1271670825f7d1d9
+  guid: 67a47ded57d0bb1c-a615fe838dc98ec3
 --- !u!114 &7266510120254424791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15936,7 +15936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto4
+      value: Seat4
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16034,7 +16034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto6
+      value: Seat6
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16124,7 +16124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto2
+      value: Seat2
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046236, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Mesh
@@ -16206,7 +16206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto8
+      value: Seat8
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16304,7 +16304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto3
+      value: Seat3
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16402,7 +16402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto7
+      value: Seat7
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16500,7 +16500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: PostoGuidatore
+      value: DriverSeat
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16598,7 +16598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto5
+      value: Seat5
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Layer
@@ -16688,7 +16688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046234, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Name
-      value: Posto1
+      value: Seat1
       objectReference: {fileID: 0}
     - target: {fileID: 8445803695282046236, guid: e1b116e098e53a04889ff7d96b75bf5d, type: 3}
       propertyPath: m_Mesh

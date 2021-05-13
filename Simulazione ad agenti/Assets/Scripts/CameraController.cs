@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* This class create the controls for the camera. */
 public class CameraController : MonoBehaviour
 {
+    /* The values for the movement and rotation speed */
     public float movementSpeed, movementTime, rotationAmount;
+    /*Transfrom of the camera to get her position*/
     public Transform cameraTransform;
+    /*The amout of zoom*/
     public Vector3 zoomAmount;
     Vector3 newZoom;
     Vector3 newPosition;
@@ -30,27 +34,27 @@ public class CameraController : MonoBehaviour
     }
 
     void HandleMovementInput(){
-        //Avanti
+        /* Move Forward. */
         if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.UpArrow)){
             newPosition+=transform.forward*movementSpeed;
         }
-        //Dietro
+        /*Move Backward*/
         if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.DownArrow)){
             newPosition-=transform.forward*movementSpeed;
         }
-        //Destra
+        /*Move to Right*/
         if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow)){
             newPosition+=transform.right*movementSpeed;
         }
-        //Sinistra
+        /* Move to Left. */
         if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow)){
             newPosition-=transform.right*movementSpeed;
         }
-        //Gira a destra
+        /* Turn right. */
         if(Input.GetKey(KeyCode.E)){
             newRotation*=Quaternion.Euler(Vector3.up*rotationAmount);
         }
-        //Gira a sinistra
+        /* Turn Left. */
         if(Input.GetKey(KeyCode.Q)){
             newRotation*=Quaternion.Euler(Vector3.up*-rotationAmount);
         }

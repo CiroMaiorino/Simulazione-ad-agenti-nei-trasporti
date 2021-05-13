@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pullman : MonoBehaviour
+/*This class represents the Bus. */ 
+public class Bus : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    /* A Parameters that indicates if the Bus is moving. */
     public bool isMooving;
+    /* List of the targets */
     public List<Target> targets;
   
-  ///<summary>
-  ///Ritorna il primo posto libero disponibile
-  ///</summary>
+  
+  /* Return the first seat aviable. */
+  
     public Target freeTarget()
     {
         if (targets != null)
