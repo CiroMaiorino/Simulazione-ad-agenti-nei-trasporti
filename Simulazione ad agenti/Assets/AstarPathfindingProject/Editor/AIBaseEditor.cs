@@ -122,6 +122,11 @@ namespace Pathfinding {
 			if ((rigid != null || rigid2D != null) && (controller != null && controller.enabled)) {
 				EditorGUILayout.HelpBox("You are using both a Rigidbody and a Character Controller. Those components are not really designed for that. Please use only one of them.", MessageType.Warning);
 			}
+
+			var isRichAI = typeof(RichAI).IsAssignableFrom(target.GetType());
+			if (isRichAI && Application.isPlaying && AstarPath.active != null && AstarPath.active.graphs.Length > 0 && AstarPath.active.data.recastGraph == null && AstarPath.active.data.navmesh == null) {
+				EditorGUILayout.HelpBox("This script only works with a navmesh or recast graph. If you are using some other graph type you might want to use another movement script.", MessageType.Warning);
+			}
 		}
 	}
 }

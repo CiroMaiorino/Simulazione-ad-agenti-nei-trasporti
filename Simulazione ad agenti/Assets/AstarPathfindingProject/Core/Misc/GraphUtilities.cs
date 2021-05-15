@@ -162,6 +162,7 @@ namespace Pathfinding {
 			HashSet<GridNodeBase> nodeSet = nodes != null ? new HashSet<GridNodeBase>(nodes) : null;
 
 			// Use all nodes if the nodes parameter is null
+			if (grid is LayerGridGraph) nodes = nodes ?? (grid as LayerGridGraph).nodes;
 			nodes = nodes ?? grid.nodes;
 			int[] neighbourXOffsets = grid.neighbourXOffsets;
 			int[] neighbourZOffsets = grid.neighbourZOffsets;

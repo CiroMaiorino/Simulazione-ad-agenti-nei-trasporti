@@ -308,10 +308,6 @@ namespace Pathfinding {
 				// Access the internal implementation methods
 				IPathInternals ipath = (IPathInternals)path;
 
-				// Trying to prevent simple modding to allow more than one thread
-				if (pathHandler.threadID > 0) {
-					throw new System.Exception("Thread Error");
-				}
 
 				AstarProfiler.StartFastProfile(0);
 				ipath.PrepareBase(pathHandler);

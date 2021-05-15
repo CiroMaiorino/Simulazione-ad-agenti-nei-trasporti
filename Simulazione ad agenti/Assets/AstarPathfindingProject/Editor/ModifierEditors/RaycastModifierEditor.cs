@@ -23,9 +23,6 @@ namespace Pathfinding {
 			}
 
 			PropertyField("useGraphRaycasting");
-			if (FindProperty("useGraphRaycasting").boolValue) {
-				EditorGUILayout.HelpBox("Graph raycasting is only available in the pro version for the built-in graphs.", MessageType.Info);
-			}
 			if (!FindProperty("useGraphRaycasting").boolValue && !FindProperty("useRaycasting").boolValue) {
 				EditorGUILayout.HelpBox("You should use either raycasting, graph raycasting or both, otherwise this modifier will not do anything", MessageType.Warning);
 			}

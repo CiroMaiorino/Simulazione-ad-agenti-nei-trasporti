@@ -27,7 +27,7 @@ public class GameControl : MonoBehaviour
     }
     public void spawnAgent(){
         
-        var position =new Vector3(Random.Range(-5.0f, 5.0f),0,Random.Range(-5.0f,5.0f));
+        var position =new Vector3(Random.Range(-5.0f, 15.0f),0,Random.Range(-5.0f,5.0f));
 
         GameObject gameOb=Instantiate(agentPrefab,position,Spawnpoint.rotation);
         agent=gameOb.GetComponent<Agent>();

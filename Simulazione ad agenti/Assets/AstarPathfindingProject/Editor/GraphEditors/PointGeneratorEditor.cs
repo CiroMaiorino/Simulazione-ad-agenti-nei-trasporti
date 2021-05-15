@@ -6,7 +6,7 @@ namespace Pathfinding {
 	public class PointGraphEditor : GraphEditor {
 		static readonly GUIContent[] nearestNodeDistanceModeLabels = {
 			new GUIContent("Node"),
-			new GUIContent("Connection (pro version only)"),
+			new GUIContent("Connection (slower)"),
 		};
 
 		public override void OnInspectorGUI (NavGraph target) {
@@ -45,7 +45,12 @@ namespace Pathfinding {
 				EditorGUI.indentLevel--;
 			}
 
-			EditorGUILayout.Popup(new GUIContent("Nearest node queries find closest"), 0, nearestNodeDistanceModeLabels);
+			graph.optimizeForSparseGraph = EditorGUILayout.Toggle(new GUIContent("Optimize For Sparse Graph", "Check online documentation for more information."), graph.optimizeForSparseGraph);
+			graph.nearestNodeDistanceMode = (PointGraph.NodeDistanceMode)EditorGUILayout.Popup(new GUIContent("Nearest node queries find closest"), (int)graph.nearestNodeDistanceMode, nearestNodeDistanceModeLabels);
+
+			if (graph.nearestNodeDistanceMode == PointGraph.NodeDistanceMode.Connection && !graph.optimizeForSparseGraph) {
+				EditorGUILayout.HelpBox("Connection mode can only be used if Optimize For Sparse Graph is enabled", MessageType.Error);
+			}
 		}
 	}
 }
