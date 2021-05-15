@@ -26,20 +26,22 @@ public class Agent : MonoBehaviour
         ai = GetComponent<IAstarAI>();
         /* Instance of the animator from the agent. */ 
         animator = this.GetComponentInChildren<Animator>();
-        
-        /* If the bus is not moving and there are free seats the agetns will set
-         their target to one of the free seat. */
-        if (!bus.isMooving && bus.freeTarget() != null)
+          if (!bus.isMooving && bus.freeTarget() != null)
             setDestination(bus.freeTarget());
         else
         /* Change animation of the agents to waiting. */
             animator.SetBool("Waiting",true);
+
 
     }
 
     /* Update is called once per frame*/
     void Update()
     {
+        /* If the bus is not moving and there are free seats the agetns will set
+         their target to one of the free seat. */
+      
+
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
         if(ai.reachedDestination){
@@ -48,6 +50,7 @@ public class Agent : MonoBehaviour
             animator.SetBool("Sit",true);
             transform.parent=passengers.transform;  
         }
+        
         
     }
 
