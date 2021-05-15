@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4817916567249468590}
   - component: {fileID: 4817916567249468589}
   - component: {fileID: 727791845}
+  - component: {fileID: 6979970457720581871}
   m_Layer: 0
   m_Name: LowPolyManPrefabAStar
   m_TagString: Untagged
@@ -126,6 +127,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bus: {fileID: 0}
+--- !u!114 &6979970457720581871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817916567249468588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radiusBackingField: 0.5
+  heightBackingField: 2
+  centerBackingField: 1
+  locked: 0
+  lockWhenNotMoving: 0
+  agentTimeHorizon: 2
+  obstacleTimeHorizon: 10.49
+  maxNeighbours: 0
+  layer: 1
+  collidesWith: -1
+  wallAvoidForce: 1
+  wallAvoidFalloff: 1
+  priority: 0.5
+  debug: 0
 --- !u!1001 &4817916565792536294
 PrefabInstance:
   m_ObjectHideFlags: 0
