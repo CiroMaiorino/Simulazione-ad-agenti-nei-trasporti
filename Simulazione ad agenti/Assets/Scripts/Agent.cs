@@ -16,6 +16,7 @@ public class Agent : MonoBehaviour
     private IAstarAI ai;
     /* Gameobject that contains all the passengers of the bus. */
     private GameObject passengers;
+    private Seeker seeker;
 
     /* Start is called before the first frame update. */
     void Start()
@@ -24,6 +25,7 @@ public class Agent : MonoBehaviour
         passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
+        seeker=GetComponent<Seeker>();
         /* Instance of the animator from the agent. */ 
         animator = this.GetComponentInChildren<Animator>();
           if (!bus.isMooving && bus.freeTarget() != null)
@@ -48,7 +50,9 @@ public class Agent : MonoBehaviour
             animator.SetBool("Waiting",true);
             transform.rotation =Quaternion.identity;
             animator.SetBool("Sit",true);
-            transform.parent=passengers.transform;  
+            transform.parent=passengers.transform;
+            seeker.CancelCurrentPathRequest();
+              
         }
         
         

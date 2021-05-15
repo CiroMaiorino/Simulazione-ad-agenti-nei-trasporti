@@ -24,6 +24,11 @@ public class GameControl : MonoBehaviour
                     spawnAgent();
                 }
             }
+            if(Input.GetKeyDown(KeyCode.M)){
+                bus.isMooving=true;
+                bus.transform.position=new Vector3(0,0.63f,0);
+                
+            }
     }
     public void spawnAgent(){
         
