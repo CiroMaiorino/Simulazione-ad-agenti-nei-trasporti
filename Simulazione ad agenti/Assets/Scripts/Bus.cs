@@ -9,8 +9,17 @@ public class Bus : MonoBehaviour
     public bool isMooving;
     /* List of the targets */
     public List<Target> targets;
+    private GameObject ramp;
+
+    private void Start() {
+        ramp=GameObject.Find("Ramp");
+    }
   
-  
+  private void Update() {
+      if(isMooving)
+        ramp.active=false;
+        else ramp.active=true;
+  }
   /* Return the first seat aviable. */
   
     public Target freeTarget()

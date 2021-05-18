@@ -17,7 +17,7 @@ public class Agent : MonoBehaviour
     /* Gameobject that contains all the passengers of the bus. */
     private GameObject passengers;
     private Seeker seeker;
-
+    private float timeToRotate=0.05f; 
     /* Start is called before the first frame update. */
     void Start()
     {
@@ -48,11 +48,12 @@ public class Agent : MonoBehaviour
          rotate him and make him sit. */
         if(ai.reachedDestination){
             animator.SetBool("Waiting",true);
-            transform.rotation =Quaternion.identity;
+            transform.rotation=Quaternion.Slerp(transform.rotation,Quaternion.identity,timeToRotate);
             animator.SetBool("Sit",true);
+            
             transform.parent=passengers.transform;
             //Da errore nei cloni
-           // seeker.CancelCurrentPathRequest();
+            seeker.CancelCurrentPathRequest();
               
         }
         

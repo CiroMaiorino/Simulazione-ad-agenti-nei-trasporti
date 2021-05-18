@@ -14351,7 +14351,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7266510118969851884}
-  - component: {fileID: 7266510118969851885}
   m_Layer: 6
   m_Name: BasicBus
   m_TagString: Untagged
@@ -14378,20 +14377,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7266510118969851885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7266510118969851859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd2ca12ae325cf49b39f9087ea9b559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMooving: 0
-  targets: []
 --- !u!1 &7266510119314574974
 GameObject:
   m_ObjectHideFlags: 0
