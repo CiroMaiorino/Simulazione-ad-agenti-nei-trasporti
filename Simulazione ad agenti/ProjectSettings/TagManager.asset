@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DestinationPoint
+  - Sit
   layers:
   - Default
   - TransparentFX
