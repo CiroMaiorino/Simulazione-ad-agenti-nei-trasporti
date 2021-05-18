@@ -51,7 +51,8 @@ public class Agent : MonoBehaviour
             transform.rotation =Quaternion.identity;
             animator.SetBool("Sit",true);
             transform.parent=passengers.transform;
-            seeker.CancelCurrentPathRequest();
+            //Da errore nei cloni
+           // seeker.CancelCurrentPathRequest();
               
         }
         

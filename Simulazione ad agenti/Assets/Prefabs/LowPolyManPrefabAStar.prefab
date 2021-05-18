@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4817916567249468589}
   - component: {fileID: 727791845}
   - component: {fileID: 6979970457720581871}
+  - component: {fileID: 975570369}
   m_Layer: 0
   m_Name: LowPolyManPrefabAStar
   m_TagString: Untagged
@@ -154,6 +155,20 @@ MonoBehaviour:
   wallAvoidFalloff: 1
   priority: 0.5
   debug: 0
+--- !u!136 &975570369
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817916567249468588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 1.8546926
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8804019, z: 0}
 --- !u!1001 &4817916565792536294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -993,7 +1008,9 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.8565384
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1537196715450301706, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
+    - {fileID: 8767655879096683786, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
 --- !u!4 &4283016733106961390 stripped
 Transform:
