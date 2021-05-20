@@ -10,6 +10,7 @@ public class Agent : MonoBehaviour
     AIDestinationSetter destinationSetter;
     /* Represents the Bus on the scene. */
     public Bus bus;
+    private Target target;
     /* Declaration of the animator to work on agent's animation. */
     private Animator animator;
     /* Declaration of IAstarAI to use A* methods. */
@@ -28,8 +29,11 @@ public class Agent : MonoBehaviour
         seeker=GetComponent<Seeker>();
         /* Instance of the animator from the agent. */ 
         animator = this.GetComponentInChildren<Animator>();
-          if (!bus.isMooving && bus.freeTarget() != null)
-            setDestination(bus.freeTarget());
+          if (!bus.isMooving && bus.freeTarget() != null){
+            target=bus.freeTarget();
+            setDestination(target);
+          }
+            
         else
         /* Change animation of the agents to waiting. */
             animator.SetBool("Waiting",true);
@@ -46,11 +50,18 @@ public class Agent : MonoBehaviour
 
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
-        if(ai.reachedDestination){
-            animator.SetBool("Waiting",true);
+        if(ai.reachedDestination ){
             transform.rotation=Quaternion.Slerp(transform.rotation,Quaternion.identity,timeToRotate);
+            animator.SetBool("Waiting",true);
             animator.SetBool("Sit",true);
             
+          
+            bool isRotated=transform.rotation == Quaternion.identity;
+            bool haveRigidBody=gameObject.GetComponent<Rigidbody>()!=null;
+           Debug.LogError("Vado al target "+ target.name+" isRotated="+isRotated+" haveRigidBody="+haveRigidBody);
+            if( isRotated && !haveRigidBody){
+              gameObject.AddComponent<Rigidbody>();
+            }
             transform.parent=passengers.transform;
             //Da errore nei cloni
             seeker.CancelCurrentPathRequest();

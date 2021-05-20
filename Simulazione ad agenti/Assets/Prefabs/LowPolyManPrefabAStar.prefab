@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!136 &751827925
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283016733106961396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 1.8546926
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8804019, z: 0}
 --- !u!1 &4817916567249468588
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,9 +26,8 @@ GameObject:
   - component: {fileID: 4817916567249468591}
   - component: {fileID: 4817916567249468590}
   - component: {fileID: 4817916567249468589}
-  - component: {fileID: 727791845}
   - component: {fileID: 6979970457720581871}
-  - component: {fileID: 975570369}
+  - component: {fileID: 7422375196167856397}
   m_Layer: 0
   m_Name: LowPolyManPrefabAStar
   m_TagString: Untagged
@@ -115,19 +128,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &727791845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817916567249468588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288cd68b9842fff47806fcef4d49864e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bus: {fileID: 0}
 --- !u!114 &6979970457720581871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,30 +145,29 @@ MonoBehaviour:
   heightBackingField: 2
   centerBackingField: 1
   locked: 0
-  lockWhenNotMoving: 0
+  lockWhenNotMoving: 1
   agentTimeHorizon: 2
   obstacleTimeHorizon: 10.49
-  maxNeighbours: 0
+  maxNeighbours: 1
   layer: 1
   collidesWith: -1
   wallAvoidForce: 1
   wallAvoidFalloff: 1
   priority: 0.5
   debug: 0
---- !u!136 &975570369
-CapsuleCollider:
+--- !u!114 &7422375196167856397
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4817916567249468588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.15
-  m_Height: 1.8546926
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8804019, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288cd68b9842fff47806fcef4d49864e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bus: {fileID: 0}
 --- !u!1001 &4817916565792536294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1012,6 +1011,11 @@ PrefabInstance:
     - {fileID: 1537196715450301706, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
     - {fileID: 8767655879096683786, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
+--- !u!1 &4283016733106961396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8767655879096683794, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
+  m_PrefabInstance: {fileID: 4817916565792536294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4283016733106961390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8767655879096683784, guid: 8a55e3be67a2544559238455abad58dd, type: 3}
