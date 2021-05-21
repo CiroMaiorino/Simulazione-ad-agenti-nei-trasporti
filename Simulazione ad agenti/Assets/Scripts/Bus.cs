@@ -17,8 +17,8 @@ public class Bus : MonoBehaviour
   
   private void Update() {
       if(isMooving)
-        ramp.SetActive(false);
-        else ramp.SetActive(true);
+        ramp.active=false;
+        else ramp.active=true;
   }
   /* Return the first seat aviable. */
   

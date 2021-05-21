@@ -16,7 +16,6 @@ public class Agent : MonoBehaviour
     /* Declaration of IAstarAI to use A* methods. */
     private IAstarAI ai;
     /* Gameobject that contains all the passengers of the bus. */
-    private AIPath aiPath;
     private GameObject passengers;
     private Seeker seeker;
     private float timeToRotate=0.05f; 
@@ -28,7 +27,6 @@ public class Agent : MonoBehaviour
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
         seeker=GetComponent<Seeker>();
-        aiPath=GetComponent<AIPath>();
         /* Instance of the animator from the agent. */ 
         animator = this.GetComponentInChildren<Animator>();
           if (!bus.isMooving && bus.freeTarget() != null){
@@ -60,14 +58,13 @@ public class Agent : MonoBehaviour
           
             bool isRotated=transform.rotation == Quaternion.identity;
             bool haveRigidBody=gameObject.GetComponent<Rigidbody>()!=null;
-            //Debug.LogError("Vado al target "+ target.name+" isRotated="+isRotated+" haveRigidBody="+haveRigidBody);
+           Debug.LogError("Vado al target "+ target.name+" isRotated="+isRotated+" haveRigidBody="+haveRigidBody);
             if( isRotated && !haveRigidBody){
               gameObject.AddComponent<Rigidbody>();
-              aiPath.enabled = false;
             }
             transform.parent=passengers.transform;
             //Da errore nei cloni
-            
+            seeker.CancelCurrentPathRequest();
               
         }
         
