@@ -37,10 +37,18 @@ public class GameControl : MonoBehaviour
         GameObject gameOb=Instantiate(agentPrefab,position,Spawnpoint.rotation);
         agent=gameOb.GetComponent<Agent>();
         agent.bus=bus;
-        
-        
-        
+           
     }
-    
-    
+    private void onTriggerEnter(Collider collider)
+    {
+        isMooving = false;
+        bus.GetComponent<PathFollower>().speed = 0;
+    }
+
+    /*
+     * Se bus è alla fermata x di un array di fermate (Magari presa da posizione) stop del bus   O tramite linea sul terreno che fa da trigger
+     * 
+     * Se un omino sta camminando sta camminando ferma il bus (Sull'idea di farli spawnare alla fermata) 
+     * un set di fermata a cui scendere presa a random dagli omini quando salgono se il bus e alla loro scendono
+     * il punto di spawn degli omini sarà una fermata randomica alla pressione di un tasto.*/
 }
