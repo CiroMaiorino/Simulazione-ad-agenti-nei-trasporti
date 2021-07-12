@@ -23,6 +23,10 @@ public class Bus : MonoBehaviour
   }
   /* Return the first seat aviable. */
   
+    public  void Cose()
+    {
+        Debug.Log("We");
+    }
     public Target freeTarget()
     {
         if (targets != null)
@@ -30,15 +34,6 @@ public class Bus : MonoBehaviour
             return targets.Find(target => target.isOccupied == false);
         }
         return null;
-    }
-    private void onTriggerEnter(Collider collider)
-    {
-        if (collider.tag is "StopTrigger")
-        {
-            Debug.Log("Firmt");
-            isMooving = false;
-            GetComponent<PathFollower>().speed = 0;
-        }
     }
 
 
