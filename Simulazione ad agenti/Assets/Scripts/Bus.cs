@@ -36,5 +36,11 @@ public class Bus : MonoBehaviour
         return null;
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "StopTrigger")
+    //        Debug.Log("SFACCIMM");
+    //}
+
 
 }

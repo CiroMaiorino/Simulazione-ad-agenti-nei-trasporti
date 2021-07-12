@@ -9,15 +9,23 @@ public class Stop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bus = transform.parent.parent.GetComponent<Bus>();
+       
+        if (transform.parent.gameObject != null)
+            Debug.Log("papà è viv");
+        else Debug.Log("papà è muort");
+        if (transform.parent.parent.gameObject != null)
+            Debug.Log("o nonn è viv");
+        else Debug.Log("o nonn è muort");
+        bus = transform.parent.transform.parent.GetComponent<Bus>();
+       
     }
-    private void onTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "StopTrigger")
         {
             Debug.Log("Firmt");
             bus.isMooving = false;
-            GetComponent<PathFollower>().speed = 0;
+            bus.GetComponent<PathFollower>().speed = 0;
         }
     }
     }
