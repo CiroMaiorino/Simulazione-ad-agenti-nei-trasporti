@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using PathCreation.Examples;
 
 public class GameControl : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class GameControl : MonoBehaviour
     }
     private void onTriggerEnter(Collider collider)
     {
-        isMooving = false;
+        bus.isMooving = false;
         bus.GetComponent<PathFollower>().speed = 0;
     }
 
