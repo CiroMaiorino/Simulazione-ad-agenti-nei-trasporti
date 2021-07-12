@@ -57,9 +57,9 @@ public class Agent : MonoBehaviour
             animator.SetBool("Waiting",true);
             animator.SetBool("Sit",true);
             
-          
-            bool isRotated=transform.rotation == Quaternion.identity;
-            bool haveRigidBody=gameObject.GetComponent<Rigidbody>()!=null;
+            
+            bool isRotated = (transform.rotation.y - Quaternion.identity.y)<=0.1;
+            bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
             //Debug.LogError("Vado al target "+ target.name+" isRotated="+isRotated+" haveRigidBody="+haveRigidBody);
             if( isRotated && !haveRigidBody){
               gameObject.AddComponent<Rigidbody>();
