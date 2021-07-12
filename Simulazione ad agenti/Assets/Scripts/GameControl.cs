@@ -40,11 +40,6 @@ public class GameControl : MonoBehaviour
         agent.bus=bus;
            
     }
-    private void onTriggerEnter(Collider collider)
-    {
-        bus.isMooving = false;
-        bus.GetComponent<PathFollower>().speed = 0;
-    }
 
     /*
      * Se bus è alla fermata x di un array di fermate (Magari presa da posizione) stop del bus   O tramite linea sul terreno che fa da trigger

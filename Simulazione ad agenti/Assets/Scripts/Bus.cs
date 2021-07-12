@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation.Examples;
 
 /*This class represents the Bus. */ 
 public class Bus : MonoBehaviour
@@ -30,6 +31,15 @@ public class Bus : MonoBehaviour
         }
         return null;
     }
+    private void onTriggerEnter(Collider collider)
+    {
+        if (collider.tag is "StopTrigger")
+        {
+            Debug.Log("Firmt");
+            isMooving = false;
+            GetComponent<PathFollower>().speed = 0;
+        }
+    }
 
-    
+
 }
