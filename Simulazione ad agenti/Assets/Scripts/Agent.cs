@@ -19,7 +19,9 @@ public class Agent : MonoBehaviour
     private AIPath aiPath;
     private GameObject passengers;
     private Seeker seeker;
-    private float timeToRotate=0.05f; 
+    private float timeToRotate=0.05f;
+    private int waitingSpot;
+    private int busDestrination;
     /* Start is called before the first frame update. */
     void Start()
     {

@@ -7,14 +7,20 @@ using PathCreation.Examples;
 public class GameControl : MonoBehaviour
 {
 
-    public GameObject agentPrefab;
+    public Agent agentPrefab;
     public Transform Spawnpoint;
     public Bus bus;
-    private Agent agent;
     public int numeroAgenti;
-
+    private int waitingSpotTmp;
+    [SerializeField] GameObject busStops;
+    private List<Transform> stops;
+    
     void Start() {
-        
+        stops = new List<Transform>();
+        foreach (Transform child in busStops.transform)
+        {
+            stops.Add(child);
+        }
     }
 
      void Update(){
@@ -32,12 +38,14 @@ public class GameControl : MonoBehaviour
             }
     }
     public void spawnAgent(){
-        
-        var position =new Vector3(Random.Range(0f, 10.0f),0,Random.Range(-5.0f,5.0f));
 
-        GameObject gameOb=Instantiate(agentPrefab,position,Spawnpoint.rotation);
-        agent=gameOb.GetComponent<Agent>();
-        agent.bus=bus;
+        waitingSpotTmp=Random.Range(0, 4);
+        var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
+
+        agentPrefab.bus = bus;
+        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Spawnpoint.rotation);
+        
+      
            
     }
 
