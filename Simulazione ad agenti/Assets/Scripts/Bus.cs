@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation.Examples;
 
-/*This class represents the Bus. */ 
+/// <summary>
+///This class represents the Bus.  
+/// </summary>
+ 
 public class Bus : MonoBehaviour
 {
-    /* A Parameters that indicates if the Bus is moving. */
+    /// <summary>
+    /// A Parameters that indicates if the Bus is moving.
+    /// </summary>
     public bool isMooving;
-    /* List of the targets */
-    public List<Target> targets;
+    public GameObject TargetParent;
+    /// <summary>
+    ///  List of the targets
+    /// </summary>
+    [SerializeField] List<Target> targets;
+    /// <summary>
+    /// bus ramp
+    /// </summary>
     private GameObject ramp;
 
     private void Start() {
+        targets = Utility<Target>.GetAllChildren(TargetParent);
         ramp=GameObject.Find("Ramp");
     }
   
@@ -21,12 +33,11 @@ public class Bus : MonoBehaviour
         ramp.SetActive(false);
         else ramp.SetActive(true);
   }
-  /* Return the first seat aviable. */
-  
-    public  void Cose()
-    {
-        Debug.Log("We");
-    }
+
+    /// <summary>
+    /// Return the first seat aviable.
+    /// </summary>
+    /// <returns></returns>
     public Target freeTarget()
     {
         if (targets != null)
@@ -36,11 +47,7 @@ public class Bus : MonoBehaviour
         return null;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "StopTrigger")
-    //        Debug.Log("SFACCIMM");
-    //}
-
+  
+    
 
 }

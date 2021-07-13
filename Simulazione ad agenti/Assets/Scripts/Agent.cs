@@ -6,23 +6,36 @@ using Pathfinding;
 /* This class represent the agent. */
 public class Agent : MonoBehaviour
 {
-    /* Operate to set the destination of the agent.*/
+    /// <summary>
+    /// Operate to set the destination of the agent.
+    /// </summary>    
     AIDestinationSetter destinationSetter;
-    /* Represents the Bus on the scene. */
+    /// <summary>
+    /// Represents the Bus on the scene. 
+    /// </summary>
     public Bus bus;
+    /// <summary>
+    /// Represents the target for the agent
+    /// </summary>
     private Target target;
-    /* Declaration of the animator to work on agent's animation. */
+    /// <summary>
+    /// Declaration of the animator to work on agent's animation.
+    /// </summary>
     private Animator animator;
-    /* Declaration of IAstarAI to use A* methods. */
+    /// <summary>
+    /// Declaration of IAstarAI to use A* methods.
+    /// </summary>
     private IAstarAI ai;
-    /* Gameobject that contains all the passengers of the bus. */
+    /// <summary>
+    ///  Gameobject that contains all the passengers of the bus.
+    /// </summary>
     private AIPath aiPath;
     private GameObject passengers;
     private Seeker seeker;
     private float timeToRotate=0.05f;
     private int waitingSpot;
-    private int busDestrination;
-    /* Start is called before the first frame update. */
+    private int busDestination;
+   
     void Start()
     {
         /* Instance of objects Declared before. */
@@ -33,10 +46,14 @@ public class Agent : MonoBehaviour
         aiPath=GetComponent<AIPath>();
         /* Instance of the animator from the agent. */ 
         animator = this.GetComponentInChildren<Animator>();
-          if (!bus.isMooving && bus.freeTarget() != null){
-            target=bus.freeTarget();
-            setDestination(target);
-          }
+       
+        //DA SISTEMARE IN MODO TALE CHE NON AVVENGA SOLO ALLO START, UN'IDEA SAREBBE CHE UNA VOLTA CHE IL PULLMAN SI FERMA AD UNA FERMATA SI CHIAMA IL METODO PER ASSEGNARE SUGLI AGENTI NELLA FERMATA
+            /* If the bus is not moving and there are free seats the agents will set
+          their target to one of the free seat. */
+            if (!bus.isMooving && bus.freeTarget() != null){
+                target=bus.freeTarget();
+                setDestination(target);
+              }
             
         else
         /* Change animation of the agents to waiting. */
@@ -45,11 +62,9 @@ public class Agent : MonoBehaviour
 
     }
 
-    /* Update is called once per frame*/
     void Update()
     {
-        /* If the bus is not moving and there are free seats the agetns will set
-         their target to one of the free seat. */
+        
       
 
         /* When the agents arrive at the target change the animation to waiting
@@ -62,13 +77,13 @@ public class Agent : MonoBehaviour
             
             bool isRotated = (transform.rotation.y - Quaternion.identity.y)<=0.1;
             bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
-            //Debug.LogError("Vado al target "+ target.name+" isRotated="+isRotated+" haveRigidBody="+haveRigidBody);
+
             if( isRotated && !haveRigidBody){
               gameObject.AddComponent<Rigidbody>();
               aiPath.enabled = false;
             }
             transform.parent=passengers.transform;
-            //Da errore nei cloni
+            
             
               
         }
@@ -76,7 +91,10 @@ public class Agent : MonoBehaviour
         
     }
 
-    /* The method that set the target for the agents. */
+    /// <summary>
+    /// The method that set the target for the agents.  
+    /// </summary>
+
     public void setDestination(Target t){
         destinationSetter.target=t.transform;
         t.isOccupied=true;

@@ -6,8 +6,10 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
 
-/*Parameter that indicates if the seat is Occupied with his get and set methods. */
-   public bool isOccupied{get;set;}
+    /// <summary>
+    ///Parameter that indicates if the seat is Occupied with his get and set methods. 
+    /// </summary>
+    public bool isOccupied{get;set;}
 
 
 }

@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class TargetControl : MonoBehaviour
 {
-    /* List of the Targets modificable on the inspector.*/ 
+    /// <summary>
+    /// List of the Targets modificable on the inspector. 
+    /// </summary>
     [SerializeField] List<Target> targets =new List<Target>();
 
-     /* Start is called before the first frame update. */
     void Start()
     {
       
     }
 
-    /* Update is called once per frame. */
     void Update()
     {
         
     }
-    /* Method that returns a list of the targets free. */
+    /// <summary>
+    /// Method that returns a list of the targets free. 
+    /// </summary>
     public Target freeTarget(){
         if(targets != null){
             return targets.Find(target =>target.isOccupied==false);

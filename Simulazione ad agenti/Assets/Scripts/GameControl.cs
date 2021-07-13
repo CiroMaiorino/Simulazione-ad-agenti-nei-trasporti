@@ -6,44 +6,47 @@ using PathCreation.Examples;
 
 public class GameControl : MonoBehaviour
 {
-
-    public Agent agentPrefab;
-    public Transform Spawnpoint;
     public Bus bus;
     public int numeroAgenti;
-    private int waitingSpotTmp;
     [SerializeField] GameObject busStops;
+    [SerializeField] Agent agentPrefab;
+    
     private List<Transform> stops;
     
     void Start() {
-        stops = new List<Transform>();
-        foreach (Transform child in busStops.transform)
-        {
-            stops.Add(child);
-        }
+        stops = Utility<Transform>.GetAllChildren(busStops);
     }
 
      void Update(){
-            
-            if(Input.GetKeyDown(KeyCode.P)){
-
-                for(;numeroAgenti>0;numeroAgenti--){
-                    spawnAgent();
-                }
-            }
-            if(Input.GetKeyDown(KeyCode.M)){
-                bus.isMooving=true;
-                bus.transform.position=new Vector3(0,0.63f,0);
-                
-            }
+        GameActions();
     }
+
+
+    void GameActions()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+
+            for (; numeroAgenti > 0; numeroAgenti--)
+            {
+                spawnAgent();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            bus.isMooving = true;
+            bus.transform.position = new Vector3(0, 0.63f, 0);
+
+        }
+    }
+
     public void spawnAgent(){
 
-        waitingSpotTmp=Random.Range(0, 4);
+        int waitingSpotTmp =Random.Range(0, stops.Count);
         var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
 
         agentPrefab.bus = bus;
-        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Spawnpoint.rotation);
+        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity);
         
       
            
