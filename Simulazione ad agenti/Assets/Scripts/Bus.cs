@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation.Examples;
+using Pathfinding;
 
 /// <summary>
 ///This class represents the Bus.  
@@ -26,14 +27,20 @@ public class Bus : MonoBehaviour
     private void Start() {
         targets = Utility<Target>.GetAllChildren(TargetParent);
         ramp=GameObject.Find("Ramp");
+        ramp.SetActive(false);
     }
   
   private void Update() {
-      if(isMooving)
-        ramp.SetActive(false);
-        else ramp.SetActive(true);
-  }
+        
 
+  }
+    public void WaitingPassangers()
+    {
+        isMooving = false;
+        GetComponent<PathFollower>().speed = 0;
+        ramp.SetActive(true);
+        AstarPath.active.Scan();
+    }
     /// <summary>
     /// Return the first seat aviable.
     /// </summary>

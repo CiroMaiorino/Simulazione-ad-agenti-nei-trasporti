@@ -32,12 +32,7 @@ public class GameControl : MonoBehaviour
                 spawnAgent();
             }
         }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            bus.isMooving = true;
-            bus.transform.position = new Vector3(0, 0.63f, 0);
 
-        }
     }
 
     public void spawnAgent(){
@@ -46,10 +41,7 @@ public class GameControl : MonoBehaviour
         var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
 
         agentPrefab.bus = bus;
-        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity);
-        
-      
-           
+        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];    
     }
 
     /*

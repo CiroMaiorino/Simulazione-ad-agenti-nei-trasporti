@@ -6,6 +6,7 @@ using UnityEngine;
 public class Stop : MonoBehaviour
 {
     private Bus bus;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,19 @@ public class Stop : MonoBehaviour
     {
         if (collider.gameObject.tag == "StopTrigger")
         {
-            bus.isMooving = false;
-            bus.GetComponent<PathFollower>().speed = 0;
+            GameObject colliderParent= collider.gameObject.transform.parent.gameObject;
+            List<Agent> dudes = Utility<Agent>.GetAllChildren(colliderParent);
+            
+            if (dudes.Count != 0)
+            {
+                bus.WaitingPassangers();
+                foreach(Agent agent in dudes)
+                {
+                    agent.Movement();
+                }
+            }
+
+              
         }
     }
     }

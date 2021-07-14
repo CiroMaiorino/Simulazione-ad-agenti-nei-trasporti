@@ -13,7 +13,8 @@ public static class  Utility<T> where T : Component
     {
         List<T> children = new List<T>();
         foreach (Transform child in parent.transform)
-            children.Add(child.GetComponent<T>());
+            if(child.GetComponent<T>()!=null)
+                children.Add(child.GetComponent<T>());
         return children;
     }
 

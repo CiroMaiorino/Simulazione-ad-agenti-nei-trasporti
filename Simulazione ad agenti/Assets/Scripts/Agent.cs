@@ -33,8 +33,6 @@ public class Agent : MonoBehaviour
     private GameObject passengers;
     private Seeker seeker;
     private float timeToRotate=0.05f;
-    private int waitingSpot;
-    private int busDestination;
    
     void Start()
     {
@@ -42,40 +40,34 @@ public class Agent : MonoBehaviour
         passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
-        seeker=GetComponent<Seeker>();
-        aiPath=GetComponent<AIPath>();
-        /* Instance of the animator from the agent. */ 
+        seeker = GetComponent<Seeker>();
+        aiPath = GetComponent<AIPath>();
+        /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
-       
-        //DA SISTEMARE IN MODO TALE CHE NON AVVENGA SOLO ALLO START, UN'IDEA SAREBBE CHE UNA VOLTA CHE IL PULLMAN SI FERMA AD UNA FERMATA SI CHIAMA IL METODO PER ASSEGNARE SUGLI AGENTI NELLA FERMATA
-            /* If the bus is not moving and there are free seats the agents will set
-          their target to one of the free seat. */
-            if (!bus.isMooving && bus.freeTarget() != null){
-                target=bus.freeTarget();
-                setDestination(target);
-              }
-            
-        else
-        /* Change animation of the agents to waiting. */
-            animator.SetBool("Waiting",true);
-
 
     }
-
+    public void Movement()
+    {
+        /* If the bus is not moving and there are free seats the agents will set
+      their target to one of the free seat. */
+        if (!bus.isMooving && bus.freeTarget() != null)
+        {
+            animator.SetBool("Waiting", false);
+            target = bus.freeTarget();
+            setDestination(target);
+        }
+    }
     void Update()
     {
-        
-      
-
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
         if(ai.reachedDestination ){
-            transform.rotation=Quaternion.Slerp(transform.rotation,Quaternion.identity,timeToRotate);
+            transform.rotation=Quaternion.Slerp(transform.rotation, bus.transform.rotation, timeToRotate);
             animator.SetBool("Waiting",true);
             animator.SetBool("Sit",true);
             
             
-            bool isRotated = (transform.rotation.y - Quaternion.identity.y)<=0.1;
+            bool isRotated = (transform.rotation.y - bus.transform.rotation.y)<=0.1;
             bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
 
             if( isRotated && !haveRigidBody){
