@@ -39,8 +39,9 @@ public class GameControl : MonoBehaviour
 
         int waitingSpotTmp =Random.Range(0, stops.Count);
         var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
-
+        
         agentPrefab.bus = bus;
+        agentPrefab.mystop = Random.Range(1, stops.Count+1);
         Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];    
     }
 

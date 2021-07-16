@@ -32,10 +32,15 @@ public class Agent : MonoBehaviour
     private AIPath aiPath;
     private GameObject passengers;
     private Seeker seeker;
-    private float timeToRotate=0.05f;
+    private float timeCount=0f;
+    private float elapsedTime=0f;
+
+    [HideInInspector]
+    public int mystop;
    
     void Start()
     {
+        
         /* Instance of objects Declared before. */
         passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
@@ -44,7 +49,7 @@ public class Agent : MonoBehaviour
         aiPath = GetComponent<AIPath>();
         /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
-
+        
     }
     public void Movement()
     {
@@ -57,12 +62,26 @@ public class Agent : MonoBehaviour
             setDestination(target);
         }
     }
+    public void getDown()
+    {
+        aiPath.enabled = true;
+        Destroy(GetComponent<Rigidbody>());
+    }
+    IEnumerator RotateOnSpot()
+    {
+        while (elapsedTime< 3f) {
+            transform.rotation = Quaternion.Lerp(transform.rotation, bus.transform.rotation, elapsedTime/3f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
     void Update()
     {
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
         if(ai.reachedDestination ){
-            transform.rotation=Quaternion.Slerp(transform.rotation, bus.transform.rotation, timeToRotate);
+            StartCoroutine(RotateOnSpot());
+            timeCount = timeCount + Time.deltaTime;
             animator.SetBool("Waiting",true);
             animator.SetBool("Sit",true);
             
@@ -71,7 +90,8 @@ public class Agent : MonoBehaviour
             bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
 
             if( isRotated && !haveRigidBody){
-              gameObject.AddComponent<Rigidbody>();
+              gameObject.AddComponent<Rigidbody>().freezeRotation=true;
+
               aiPath.enabled = false;
             }
             transform.parent=passengers.transform;
