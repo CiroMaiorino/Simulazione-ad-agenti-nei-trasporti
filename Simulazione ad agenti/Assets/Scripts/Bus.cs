@@ -18,23 +18,29 @@ public class Bus : MonoBehaviour
     /// <summary>
     ///  List of the targets
     /// </summary>
-    [SerializeField] List<Target> targets;
+    private List<Target> seats;
+    private Target exit;
+
     /// <summary>
     /// bus ramp
     /// </summary>
     private GameObject ramp;
+    public GameObject currentStop;
+    [HideInInspector] public float speed=5f;
 
+    public Target Exit { get => exit;}
+    public List<Target> Seats { get => seats; set => seats = value; }
 
     private void Start() {
-        targets = Utility<Target>.GetAllChildren(TargetParent);
+        Seats = Utility<Target>.GetAllChildren(TargetParent);
+        exit = Seats[Seats.Count - 1];
+        Seats.RemoveAt(Seats.Count - 1);
+        
         ramp=GameObject.Find("Ramp");
         ramp.SetActive(false);
     }
   
-  private void Update() {
-        
-
-  }
+  
     public void WaitingPassangers()
     {
         isMooving = false;
@@ -42,20 +48,34 @@ public class Bus : MonoBehaviour
         ramp.SetActive(true);
         AstarPath.active.Scan();
     }
+
+    public void StartEngine()
+    {
+        StartCoroutine("StartEngineCourutine");
+    }
+    private IEnumerator StartEngineCourutine()
+    {
+        yield return new WaitForSeconds(4f);
+        Debug.Log("BrumBrum"); //Viene elaborata più volte perchè viene chiamata più volte startEngine()
+        isMooving = true;
+        GetComponent<PathFollower>().speed =speed ;
+        ramp.SetActive(false);
+
+    }
     /// <summary>
     /// Return the first seat aviable.
     /// </summary>
     /// <returns></returns>
     public Target freeTarget()
     {
-        if (targets != null)
+        if (Seats != null)
         {
-            return targets.Find(target => target.isOccupied == false);
+            return Seats.Find(target => target.IsOccupied == false);
         }
         return null;
     }
 
-  
+    
     
 
 }

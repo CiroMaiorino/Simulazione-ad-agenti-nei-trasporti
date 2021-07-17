@@ -12,12 +12,18 @@ public class GameControl : MonoBehaviour
     [SerializeField] Agent agentPrefab;
     
     private List<Transform> stops;
-    
+    private Stop stop;
     void Start() {
         stops = Utility<Transform>.GetAllChildren(busStops);
+        Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
+        
     }
 
      void Update(){
+        if (bus.GetComponent<PathFollower>().speed == 0)
+            if (Utility<Agent>.GetAllChildren(bus.currentStop).Count == 0 )
+                 bus.StartEngine();
+            
         GameActions();
     }
 
@@ -41,7 +47,7 @@ public class GameControl : MonoBehaviour
         var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
         
         agentPrefab.bus = bus;
-        agentPrefab.mystop = Random.Range(1, stops.Count+1);
+        agentPrefab.Mystop = Random.Range(1, stops.Count+1);
         Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];    
     }
 

@@ -9,22 +9,17 @@ public class TargetControl : MonoBehaviour
     /// </summary>
     [SerializeField] List<Target> targets =new List<Target>();
 
-    void Start()
-    {
-      
-    }
-
-    void Update()
-    {
-        
-    }
-    /// <summary>
-    /// Method that returns a list of the targets free. 
-    /// </summary>
+    /// <returns>
+    /// Returns a free target. 
+    /// </returns>
     public Target freeTarget(){
         if(targets != null){
-            return targets.Find(target =>target.isOccupied==false);
+            return targets.Find(target =>target.IsOccupied==false);
         }
         return null;
     }
+   
+
+
+   
 }

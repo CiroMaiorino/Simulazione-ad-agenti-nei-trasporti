@@ -13,11 +13,11 @@ public class Agent : MonoBehaviour
     /// <summary>
     /// Represents the Bus on the scene. 
     /// </summary>
-    public Bus bus;
+    [HideInInspector] public Bus bus;
     /// <summary>
     /// Represents the target for the agent
     /// </summary>
-    private Target target;
+   [SerializeField] private Target target;
     /// <summary>
     /// Declaration of the animator to work on agent's animation.
     /// </summary>
@@ -31,13 +31,13 @@ public class Agent : MonoBehaviour
     /// </summary>
     private AIPath aiPath;
     private GameObject passengers;
-    private Seeker seeker;
-    private float timeCount=0f;
     private float elapsedTime=0f;
 
-    [HideInInspector]
-    public int mystop;
-   
+  
+    [SerializeField] private int mystop;
+
+    public int Mystop { get => mystop; set => mystop = value; }
+
     void Start()
     {
         
@@ -45,7 +45,6 @@ public class Agent : MonoBehaviour
         passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
-        seeker = GetComponent<Seeker>();
         aiPath = GetComponent<AIPath>();
         /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
@@ -62,15 +61,21 @@ public class Agent : MonoBehaviour
             setDestination(target);
         }
     }
-    public void getDown()
+    public void getOff()
     {
-        aiPath.enabled = true;
+        Debug.LogError("getDown");
+        animator.SetBool("Waiting", false);
+        animator.SetBool("Sit", false);
         Destroy(GetComponent<Rigidbody>());
+        aiPath.enabled = true;
+        target.IsOccupied = false;
+        setDestination(bus.Exit);
+        
     }
     IEnumerator RotateOnSpot()
     {
-        while (elapsedTime< 3f) {
-            transform.rotation = Quaternion.Lerp(transform.rotation, bus.transform.rotation, elapsedTime/3f);
+        while (elapsedTime< 10f) {
+            transform.rotation = Quaternion.Lerp(transform.rotation, bus.transform.rotation, elapsedTime/10f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -79,25 +84,14 @@ public class Agent : MonoBehaviour
     {
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
-        if(ai.reachedDestination ){
-            StartCoroutine(RotateOnSpot());
-            timeCount = timeCount + Time.deltaTime;
-            animator.SetBool("Waiting",true);
-            animator.SetBool("Sit",true);
-            
-            
-            bool isRotated = (transform.rotation.y - bus.transform.rotation.y)<=0.1;
-            bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
-
-            if( isRotated && !haveRigidBody){
-              gameObject.AddComponent<Rigidbody>().freezeRotation=true;
-
-              aiPath.enabled = false;
+        if(ai.reachedDestination){
+            if (bus.Seats.Contains(target))
+                sitDown();
+            else { 
+                getOff(); 
+                
+                Destroy(gameObject); 
             }
-            transform.parent=passengers.transform;
-            
-            
-              
         }
         
         
@@ -108,8 +102,36 @@ public class Agent : MonoBehaviour
     /// </summary>
 
     public void setDestination(Target t){
+        target = t;
         destinationSetter.target=t.transform;
-        t.isOccupied=true;
+        t.IsOccupied=true;
     }
-    
+
+    private void sitDown()
+    {
+        
+        StartCoroutine(RotateOnSpot());
+        animator.SetBool("Waiting", true);
+        animator.SetBool("Sit", true);
+
+
+        bool isRotated = (transform.rotation.y - bus.transform.rotation.y) <= 0.1;
+        bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
+
+        if (isRotated && !haveRigidBody)
+        {
+            gameObject.AddComponent<Rigidbody>().freezeRotation = true;
+
+            aiPath.enabled = false;
+        }
+        transform.parent = passengers.transform;
+    }
+
+    private void OnDestroy()
+    {
+        Stop stop=Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
+        stop.SeatsCheck();
+        
+    }
+
 }
