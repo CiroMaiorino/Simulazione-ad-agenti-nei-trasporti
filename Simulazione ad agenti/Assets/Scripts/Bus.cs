@@ -27,9 +27,10 @@ public class Bus : MonoBehaviour
     private GameObject ramp;
     public GameObject currentStop;
     [HideInInspector] public float speed=5f;
-
+    private GameObject passengers;
     public Target Exit { get => exit;}
     public List<Target> Seats { get => seats; set => seats = value; }
+    public GameObject Passengers { get => passengers; set => passengers = value; }
 
     private void Start() {
         Seats = Utility<Target>.GetAllChildren(TargetParent);
@@ -38,10 +39,11 @@ public class Bus : MonoBehaviour
         
         ramp=GameObject.Find("Ramp");
         ramp.SetActive(false);
+        Passengers = GameObject.Find("Passengers");
     }
   
   
-    public void WaitingPassangers()
+    public void StopEngine()
     {
         isMooving = false;
         GetComponent<PathFollower>().speed = 0;
@@ -66,7 +68,7 @@ public class Bus : MonoBehaviour
     /// Return the first seat aviable.
     /// </summary>
     /// <returns></returns>
-    public Target freeTarget()
+    public Target FreeTarget()
     {
         if (Seats != null)
         {

@@ -30,7 +30,6 @@ public class Agent : MonoBehaviour
     ///  Gameobject that contains all the passengers of the bus.
     /// </summary>
     private AIPath aiPath;
-    private GameObject passengers;
     private float elapsedTime=0f;
 
   
@@ -38,11 +37,10 @@ public class Agent : MonoBehaviour
 
     public int Mystop { get => mystop; set => mystop = value; }
 
-    void Start()
+    private void Start()
     {
         
         /* Instance of objects Declared before. */
-        passengers = bus.transform.Find("Passengers").gameObject;
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
         aiPath = GetComponent<AIPath>();
@@ -50,26 +48,25 @@ public class Agent : MonoBehaviour
         animator = this.GetComponentInChildren<Animator>();
         
     }
-    public void Movement()
+    public void TakeBus()
     {
         /* If the bus is not moving and there are free seats the agents will set
       their target to one of the free seat. */
-        if (!bus.isMooving && bus.freeTarget() != null)
+        if (!bus.isMooving && bus.FreeTarget() != null)
         {
             animator.SetBool("Waiting", false);
-            target = bus.freeTarget();
-            setDestination(target);
+            target = bus.FreeTarget();
+            SetDestination(target);
         }
     }
-    public void getOff()
+    public void GetOff()
     {
-        Debug.LogError("getDown");
         animator.SetBool("Waiting", false);
         animator.SetBool("Sit", false);
         Destroy(GetComponent<Rigidbody>());
         aiPath.enabled = true;
         target.IsOccupied = false;
-        setDestination(bus.Exit);
+        SetDestination(bus.Exit);
         
     }
     IEnumerator RotateOnSpot()
@@ -80,16 +77,16 @@ public class Agent : MonoBehaviour
             yield return null;
         }
     }
-    void Update()
+    private void Update()
     {
         /* When the agents arrive at the target change the animation to waiting
          rotate him and make him sit. */
         if(ai.reachedDestination){
             if (bus.Seats.Contains(target))
-                sitDown();
-            else { 
-                getOff(); 
-                
+                SitDown();
+            else {
+                Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
+                stop.SeatsCheck();
                 Destroy(gameObject); 
             }
         }
@@ -100,14 +97,23 @@ public class Agent : MonoBehaviour
     /// <summary>
     /// The method that set the target for the agents.  
     /// </summary>
+    public bool AnimatorStatus()
+    {
+        Animator anim = GetComponentInChildren<Animator>();
 
-    public void setDestination(Target t){
+        if (anim.GetBool("Sit"))
+        {
+            return false;
+        }
+        else return true;
+    }
+    public void SetDestination(Target t){
         target = t;
         destinationSetter.target=t.transform;
         t.IsOccupied=true;
     }
 
-    private void sitDown()
+    private void SitDown()
     {
         
         StartCoroutine(RotateOnSpot());
@@ -124,14 +130,7 @@ public class Agent : MonoBehaviour
 
             aiPath.enabled = false;
         }
-        transform.parent = passengers.transform;
-    }
-
-    private void OnDestroy()
-    {
-        Stop stop=Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
-        stop.SeatsCheck();
-        
+        transform.parent = bus.Passengers.transform;
     }
 
 }
