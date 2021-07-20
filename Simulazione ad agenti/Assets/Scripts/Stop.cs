@@ -58,7 +58,7 @@ public class Stop : MonoBehaviour
         {
             if (busStop.name == "BusStop" + a.Mystop)                   //Da sempre True se qualcuno deve scendere alla fermata
             {
-                passengers.Remove(a);
+                a.transform.parent = null;
                 return true;
             }
         }

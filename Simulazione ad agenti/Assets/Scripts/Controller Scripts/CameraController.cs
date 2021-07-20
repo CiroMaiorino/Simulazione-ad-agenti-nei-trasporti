@@ -9,10 +9,13 @@ public class CameraController : MonoBehaviour
     public float movementSpeed, movementTime, rotationAmount;
     /*Transfrom of the camera to get her position*/
     public Transform cameraTransform;
+    private bool follow;
+    public Bus bus;
     /*The amout of zoom*/
     public Vector3 zoomAmount;
     Vector3 newZoom;
     Vector3 newPosition;
+    Vector3 startingPosition;
     Vector3 dragStartPosition, dragCurrentPosition;
     Vector3 rotateStartPosition, rotateCurrentPosition;
     Quaternion newRotation;
@@ -20,6 +23,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        startingPosition = transform.position;
         newPosition=transform.position;    
         newRotation=transform.rotation;
         newZoom=cameraTransform.localPosition;
@@ -31,6 +35,10 @@ public class CameraController : MonoBehaviour
     {
         HandleMovementInput();
         HandleMouseInput();
+        FollowBus();
+        if (follow)
+            transform.position = bus.transform.position + startingPosition;
+
     }
 
     void HandleMovementInput(){
@@ -114,4 +122,11 @@ public class CameraController : MonoBehaviour
         cameraTransform.localPosition=Vector3.Lerp(cameraTransform.localPosition,newZoom,Time.deltaTime*movementTime);
     }
 
+    void FollowBus()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            follow = !follow;
+        }
+    }
 }

@@ -63,8 +63,6 @@ public class Agent : MonoBehaviour
     {
         animator.SetBool("Waiting", false);
         animator.SetBool("Sit", false);
-        Destroy(GetComponent<Rigidbody>());
-        aiPath.enabled = true;
         target.IsOccupied = false;
         SetDestination(bus.Exit);
         
