@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
-    private Stop stop;
+       
 
     void Start() {
         stops = Utility<Transform>.GetAllChildren(busStops);
@@ -43,7 +43,7 @@ public class GameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
 
-            for (; numeroAgenti > 0; numeroAgenti--)
+            for (int i=numeroAgenti; i > 0; i--)
             {
                 SpawnAgent();
             }
@@ -54,10 +54,16 @@ public class GameControl : MonoBehaviour
     public void SpawnAgent(){
 
         int waitingSpotTmp =Random.Range(0, stops.Count);
-        var position =new Vector3(Random.Range(0f, 4.0f),0,Random.Range(-2.5f,2.5f));
+        SpawningArea spawningArea = Utility<SpawningArea>.GetAllChildren(stops[waitingSpotTmp].gameObject)[0];
+
+        Vector3 position = spawningArea.transform.position+new Vector3(Random.Range(-spawningArea.size.x/2,spawningArea.size.x/2),
+            0,
+            Random.Range(-spawningArea.size.z/2,spawningArea.size.z/2));
         
         agentPrefab.bus = bus;
         agentPrefab.Mystop = Random.Range(1, stops.Count+1);
-        Instantiate(agentPrefab.gameObject,position+stops[waitingSpotTmp].transform.position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];    
+        Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
+
+        Debug.LogError("Position:" + spawningArea.transform.position + "\nLocalPosition" + spawningArea.transform.localPosition);
     }
 }

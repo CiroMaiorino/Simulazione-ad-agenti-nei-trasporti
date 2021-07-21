@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     {
         HandleMovementInput();
         HandleMouseInput();
-        FollowBus();
+        //FollowBus();
         if (follow)
             transform.position = bus.transform.position + startingPosition;
 
@@ -122,11 +122,11 @@ public class CameraController : MonoBehaviour
         cameraTransform.localPosition=Vector3.Lerp(cameraTransform.localPosition,newZoom,Time.deltaTime*movementTime);
     }
 
-    void FollowBus()
+   /* void FollowBus()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
             follow = !follow;
         }
-    }
+    }*/
 }
