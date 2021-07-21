@@ -63,7 +63,5 @@ public class GameControl : MonoBehaviour
         agentPrefab.bus = bus;
         agentPrefab.Mystop = Random.Range(1, stops.Count+1);
         Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
-
-        Debug.LogError("Position:" + spawningArea.transform.position + "\nLocalPosition" + spawningArea.transform.localPosition);
     }
 }
