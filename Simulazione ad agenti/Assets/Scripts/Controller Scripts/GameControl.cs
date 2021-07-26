@@ -7,12 +7,20 @@ using PathCreation.Examples;
 public class GameControl : MonoBehaviour
 {
     public Bus bus;
-    public int numeroAgenti;
+    [Range(0,100)]public int numberAgents;
+     public int numberContagious;
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
-       
 
+
+    private void OnValidate()
+    {
+        if (numberContagious > numberAgents)
+            numberContagious = numberAgents;
+        if (numberContagious < 0)
+            numberContagious = 0;
+    }
     void Start() {
         stops = Utility<Transform>.GetAllChildren(busStops);
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
@@ -43,15 +51,19 @@ public class GameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
 
-            for (int i=numeroAgenti; i > 0; i--)
+            for (int i=numberAgents,j=numberContagious; i > 0; i--,j--)
             {
-                SpawnAgent();
+                if (j > 0)
+                    SpawnAgent(true);
+                else
+                    SpawnAgent(false);
+
             }
         }
 
     }
 
-    public void SpawnAgent(){
+    public void SpawnAgent(bool contagious){
 
         int waitingSpotTmp =Random.Range(0, stops.Count);
         SpawningArea spawningArea = Utility<SpawningArea>.GetAllChildren(stops[waitingSpotTmp].gameObject)[0];
@@ -62,6 +74,12 @@ public class GameControl : MonoBehaviour
         
         agentPrefab.bus = bus;
         agentPrefab.Mystop = Random.Range(1, stops.Count+1);
+        if (contagious)
+        {
+            agentPrefab.State = Agent.States.Contagious;
+            
+        }
+        else agentPrefab.State = Agent.States.Healthy;
         Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
     }
 }

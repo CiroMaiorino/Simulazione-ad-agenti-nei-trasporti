@@ -31,11 +31,18 @@ public class Agent : MonoBehaviour
     /// </summary>
     private AIPath aiPath;
     private float elapsedTime=0f;
-
-  
+    private Material material;
+    public enum States
+    {
+       Healthy,
+        Infected,
+        Contagious
+    }
+    public States State;
     [SerializeField] private int mystop;
 
     public int Mystop { get => mystop; set => mystop = value; }
+    
 
     private void Start()
     {
@@ -46,7 +53,9 @@ public class Agent : MonoBehaviour
         aiPath = GetComponent<AIPath>();
         /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
-        
+        material = GetComponentInChildren<Transform>().GetComponentInChildren<Renderer>().material;
+      
+        ContagiousColor();
     }
     public void TakeBus()
     {
@@ -131,4 +140,11 @@ public class Agent : MonoBehaviour
         transform.parent = bus.Passengers.transform;
     }
 
+    public void ContagiousColor()
+    {
+        if (State == States.Contagious)
+        {
+            material.color = Color.red;
+        }
+    }
 }
