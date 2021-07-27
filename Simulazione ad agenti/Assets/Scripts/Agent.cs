@@ -32,6 +32,7 @@ public class Agent : MonoBehaviour
     private AIPath aiPath;
     private float elapsedTime=0f;
     private Material material;
+    private GameObject particlesSystem;
     public enum States
     {
        Healthy,
@@ -54,8 +55,10 @@ public class Agent : MonoBehaviour
         /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
         material = GetComponentInChildren<Transform>().GetComponentInChildren<Renderer>().material;
-      
-        ContagiousColor();
+        particlesSystem = GetComponentInChildren<Illness>().gameObject;
+
+        particlesSystem.SetActive(false);
+        Contagious();
     }
     public void TakeBus()
     {
@@ -140,11 +143,12 @@ public class Agent : MonoBehaviour
         transform.parent = bus.Passengers.transform;
     }
 
-    public void ContagiousColor()
+    public void Contagious()
     {
         if (State == States.Contagious)
         {
             material.color = Color.red;
+            particlesSystem.SetActive(true);
         }
     }
 }
