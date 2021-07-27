@@ -15,12 +15,12 @@ public class ColliderCovid : MonoBehaviour
     {
         
     }
-    private void OnParticleTrigger()
-    {
-        Debug.LogError("Alberello");
-    }
     private void OnParticleCollision(GameObject other)
     {
-        Debug.LogError("Allegria");
+        if (Utility<Transform>.Infected())
+        {
+
+            GetComponentInParent<Agent>().Infected();
+        }
     }
 }

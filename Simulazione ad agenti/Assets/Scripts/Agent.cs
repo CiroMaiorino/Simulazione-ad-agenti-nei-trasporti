@@ -149,6 +149,12 @@ public class Agent : MonoBehaviour
         {
             material.color = Color.red;
             particlesSystem.SetActive(true);
+            GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
         }
+    }
+    public void Infected()
+    {
+        material.color = Color.yellow;
+        GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
     }
 }

@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 599063777489718249, guid: 27515e22afb1d024cb0d4bc60d3d2c10, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.173
+      value: 0.374
       objectReference: {fileID: 0}
     - target: {fileID: 3657267341430243434, guid: 27515e22afb1d024cb0d4bc60d3d2c10, type: 3}
       propertyPath: CollisionModule.type
@@ -193,6 +193,10 @@ PrefabInstance:
     - target: {fileID: 4817916567249468588, guid: 27515e22afb1d024cb0d4bc60d3d2c10, type: 3}
       propertyPath: m_Name
       value: LowPolyManPrefabAStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7422375196167856397, guid: 27515e22afb1d024cb0d4bc60d3d2c10, type: 3}
+      propertyPath: State
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27515e22afb1d024cb0d4bc60d3d2c10, type: 3}
