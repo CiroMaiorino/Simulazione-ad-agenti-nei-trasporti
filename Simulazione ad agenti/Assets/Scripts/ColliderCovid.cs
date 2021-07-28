@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ColliderCovid : MonoBehaviour
 {
+    private int infectionPercentage;
+
+    public int InfectionPercentage { get => infectionPercentage; set => infectionPercentage = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,7 @@ public class ColliderCovid : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
-        if (Utility<Transform>.Infected())
+        if (Utility<Transform>.Infected(InfectionPercentage))
         {
 
             GetComponentInParent<Agent>().Infected();

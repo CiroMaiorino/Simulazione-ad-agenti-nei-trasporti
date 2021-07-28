@@ -17,9 +17,9 @@ public static class  Utility<T> where T : Component
                 children.Add(child.GetComponent<T>());
         return children;
     }
-    public static bool Infected()
+    public static bool Infected(int infectionPercentage)
     {
-        return Random.Range(0, 101) <= 100;
+        return Random.Range(0, 100) < infectionPercentage;
            
         
     }

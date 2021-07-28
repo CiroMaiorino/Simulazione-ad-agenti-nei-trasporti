@@ -12,6 +12,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
+    [SerializeField] int InfectionPercentage;
 
 
     private void OnValidate()
@@ -77,9 +78,12 @@ public class GameControl : MonoBehaviour
         if (contagious)
         {
             agentPrefab.State = Agent.States.Contagious;
-            
         }
-        else agentPrefab.State = Agent.States.Healthy;
+        else
+        {
+            agentPrefab.State = Agent.States.Healthy;
+            agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
+        }
         Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
     }
 }
