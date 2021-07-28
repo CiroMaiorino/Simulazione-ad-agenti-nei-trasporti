@@ -83,6 +83,7 @@ public class GameControl : MonoBehaviour
         {
             agentPrefab.State = Agent.States.Healthy;
             agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
+            
         }
         Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
     }
