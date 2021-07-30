@@ -4,17 +4,23 @@ using UnityEngine;
 using Pathfinding;
 using PathCreation.Examples;
 
+
 public class GameControl : MonoBehaviour
 {
     public Bus bus;
-    [Range(0,100)]public int numberAgents;
-     public int numberContagious;
+    [Range(0, 100)] public int numberAgents;
+    public int numberContagious;
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
-    [SerializeField] int InfectionPercentage;
+    
+    [SerializeField, Range(0, 100)] int InfectionPercentage;
+    /// <summary>
+    /// Percantage of initial contagious agent
+    /// </summary>
+    [SerializeField, Range(0, 100)] int ContagiousPercentage;
 
-
+    
     private void OnValidate()
     {
         if (numberContagious > numberAgents)
@@ -22,24 +28,29 @@ public class GameControl : MonoBehaviour
         if (numberContagious < 0)
             numberContagious = 0;
     }
-    void Start() {
+    void Start()
+    {
         stops = Utility<Transform>.GetAllChildren(busStops);
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
-        
+        SpawningAtStops();
     }
 
-     void Update(){
+    void Update()
+    {
         if (bus.GetComponent<PathFollower>().speed == 0)
             if (Utility<Agent>.GetAllChildren(bus.currentStop).Count == 0 && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
-                 bus.StartEngine();
-            
-        GameActions();
+                bus.StartEngine();
+        TimeInputs();
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="passangers"></param>
+    /// <returns>Return true if all passangers are sat</returns>
     public bool CanStart(List<Agent> passangers)
     {
-        foreach(Agent a in passangers)
+        foreach (Agent a in passangers)
         {
             if (a.AnimatorStatus())
                 return false;
@@ -47,35 +58,40 @@ public class GameControl : MonoBehaviour
         return true;
     }
 
-    void GameActions()
+
+    /// <summary>
+    /// Spawn agents at all stop station
+    /// </summary>
+    private void SpawningAtStops()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        
+        List<SpawningArea> areas = new List<SpawningArea>();
+        foreach (Transform stop in stops) areas.Add(stop.GetComponentInChildren<SpawningArea>());
+        foreach (SpawningArea area in areas)
         {
+            
+            int effectivePendolars = Random.Range(area.AvaragePendolars - area.AvaragePendolars * 30 / 100, area.AvaragePendolars + area.AvaragePendolars * 30 / 100);
 
-            for (int i=numberAgents,j=numberContagious; i > 0; i--,j--)
-            {
-                if (j > 0)
-                    SpawnAgent(true);
-                else
-                    SpawnAgent(false);
+            for (int i = 0; i < effectivePendolars; i++)
+                SpawnAgent(area);
 
-            }
-        }
-
+               }
     }
 
-    public void SpawnAgent(bool contagious){
-
-        int waitingSpotTmp =Random.Range(0, stops.Count);
-        SpawningArea spawningArea = Utility<SpawningArea>.GetAllChildren(stops[waitingSpotTmp].gameObject)[0];
-
-        Vector3 position = spawningArea.transform.position+new Vector3(Random.Range(-spawningArea.size.x/2,spawningArea.size.x/2),
+    /// <summary>
+    /// Spawn an agent at spawing area
+    /// </summary>
+    /// <param name="area"> area where spawn the agent</param>
+    private void SpawnAgent(SpawningArea area)
+    {
+        Transform stop = area.transform.parent;
+        Vector3 position = area.transform.position + new Vector3(Random.Range(-area.size.x / 2, area.size.x / 2),
             0,
-            Random.Range(-spawningArea.size.z/2,spawningArea.size.z/2));
-        
+            Random.Range(-area.size.z / 2, area.size.z / 2));
+
         agentPrefab.bus = bus;
-        agentPrefab.Mystop = Random.Range(1, stops.Count+1);
-        if (contagious)
+        agentPrefab.Mystop = Random.Range(1, stops.Count + 1);
+        if (Utility<Transform>.Infected(ContagiousPercentage))
         {
             agentPrefab.State = Agent.States.Contagious;
         }
@@ -83,8 +99,37 @@ public class GameControl : MonoBehaviour
         {
             agentPrefab.State = Agent.States.Healthy;
             agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
-            
+
         }
-        Instantiate(agentPrefab.gameObject,position,Quaternion.identity).transform.parent=stops[waitingSpotTmp];
+        Instantiate(agentPrefab.gameObject, position, Quaternion.identity).transform.parent = stop;
+    }
+   
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+    public void Reasume()
+    {
+        Time.timeScale = 1;
+    }
+    public void setTime(float k)
+    {
+        Time.timeScale=k;
+    }
+    private void TimeInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+            if (Time.timeScale == 1)
+                Pause();
+            else
+                Reasume();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            setTime(1);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            setTime(2);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            setTime(3);
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+            setTime(0.5f);
     }
 }
