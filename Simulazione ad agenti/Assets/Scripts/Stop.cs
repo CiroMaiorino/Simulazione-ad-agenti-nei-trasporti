@@ -16,7 +16,8 @@ public class Stop : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "StopTrigger")
+        String colliderTag=collider.gameObject.tag;
+        if (colliderTag == "StopTrigger")
         {
             bus.currentStop = collider.transform.parent.gameObject;
             busStop = collider.gameObject.transform.parent.gameObject;

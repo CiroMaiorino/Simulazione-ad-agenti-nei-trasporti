@@ -7,18 +7,12 @@ public class SpawningArea : MonoBehaviour
  
 
     public Vector3 size;
+    [Range(0,15),SerializeField] private int avaragePendolars=0;
+
+    public int AvaragePendolars { get => avaragePendolars; set => avaragePendolars = value; }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnDrawGizmosSelected()
     {
