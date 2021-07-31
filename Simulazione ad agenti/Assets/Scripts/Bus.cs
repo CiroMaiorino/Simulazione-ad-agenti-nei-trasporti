@@ -15,6 +15,7 @@ public class Bus : MonoBehaviour
     /// </summary>
     public bool isMooving;
     public GameObject TargetParent;
+    public int maxPassengers;
     /// <summary>
     ///  List of the targets
     /// </summary>

@@ -5022,6 +5022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b8c0ade6e2b34408efa39b6003107d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfectionPercentage: 0
 --- !u!1 &3747363366360370394
 GameObject:
   m_ObjectHideFlags: 0
@@ -10051,7 +10052,7 @@ MonoBehaviour:
   collidesWith: -1
   wallAvoidForce: 1
   wallAvoidFalloff: 1
-  priority: 0.5
+  priority: 1
   debug: 0
 --- !u!114 &7422375196167856397
 MonoBehaviour:
@@ -10068,7 +10069,7 @@ MonoBehaviour:
   bus: {fileID: 0}
   target: {fileID: 0}
   State: 0
-  mystop: 2
+  mystop: 3
 --- !u!1001 &4817916565792536294
 PrefabInstance:
   m_ObjectHideFlags: 0

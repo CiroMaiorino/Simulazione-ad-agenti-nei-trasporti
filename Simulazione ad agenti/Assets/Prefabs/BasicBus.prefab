@@ -13671,6 +13671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMooving: 1
   TargetParent: {fileID: 7266510120543979039}
+  maxPassengers: 8
   currentStop: {fileID: 0}
   speed: 5
 --- !u!114 &1914398240

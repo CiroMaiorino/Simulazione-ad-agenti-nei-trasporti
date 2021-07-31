@@ -16,8 +16,9 @@ public class SpawningArea : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.matrix = this.transform.localToWorldMatrix;
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position,size);
+        Gizmos.DrawCube(Vector3.zero ,size);
        
     }
 }

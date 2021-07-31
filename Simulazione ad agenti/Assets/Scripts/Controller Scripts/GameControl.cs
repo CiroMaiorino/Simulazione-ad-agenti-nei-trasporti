@@ -8,8 +8,6 @@ using PathCreation.Examples;
 public class GameControl : MonoBehaviour
 {
     public Bus bus;
-    [Range(0, 100)] public int numberAgents;
-    public int numberContagious;
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
@@ -21,13 +19,7 @@ public class GameControl : MonoBehaviour
     [SerializeField, Range(0, 100)] int ContagiousPercentage;
 
     
-    private void OnValidate()
-    {
-        if (numberContagious > numberAgents)
-            numberContagious = numberAgents;
-        if (numberContagious < 0)
-            numberContagious = 0;
-    }
+  
     void Start()
     {
         stops = Utility<Transform>.GetAllChildren(busStops);
@@ -37,8 +29,9 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
+        int actualPassengersNumber = Utility<Agent>.GetAllChildren(bus.Passengers).Count;
         if (bus.GetComponent<PathFollower>().speed == 0)
-            if (Utility<Agent>.GetAllChildren(bus.currentStop).Count == 0 && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
+            if ((Utility<Agent>.GetAllChildren(bus.currentStop).Count == 0 || actualPassengersNumber==bus.maxPassengers) && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
                 bus.StartEngine();
         TimeInputs();
     }
