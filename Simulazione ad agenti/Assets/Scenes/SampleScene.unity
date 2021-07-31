@@ -6679,6 +6679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BusStop3
       objectReference: {fileID: 0}
+    - target: {fileID: 2984283321760550707, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.99
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
 --- !u!43 &917073262
@@ -10341,6 +10345,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -10.7633
       objectReference: {fileID: 0}
+    - target: {fileID: 2984283321760550707, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.87
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
 --- !u!43 &1436912368
@@ -12130,6 +12138,10 @@ PrefabInstance:
     - target: {fileID: 2984283321639421125, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
       propertyPath: m_Name
       value: BusStop2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984283321760550707, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5e8117d978f0a4897f49b42e9d61a6, type: 3}
