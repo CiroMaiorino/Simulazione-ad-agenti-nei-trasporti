@@ -27,8 +27,8 @@ public class Bus : MonoBehaviour
     /// </summary>
     private GameObject ramp;
     public GameObject currentStop;
-    [HideInInspector] public float speed=5f;
     private GameObject passengers;
+    private GridGraph gridGraph;
     public Target Exit { get => exit;}
     public List<Target> Seats { get => seats; set => seats = value; }
     public GameObject Passengers { get => passengers; set => passengers = value; }
@@ -37,7 +37,7 @@ public class Bus : MonoBehaviour
         Seats = Utility<Target>.GetAllChildren(TargetParent);
         exit = Seats[Seats.Count - 1];
         Seats.RemoveAt(Seats.Count - 1);
-        
+        gridGraph = AstarPath.active.data.gridGraph;     
         ramp=GameObject.Find("Ramp");
         ramp.SetActive(false);
         Passengers = GameObject.Find("Passengers");
@@ -48,6 +48,7 @@ public class Bus : MonoBehaviour
     {
         isMooving = false;
         GetComponent<PathFollower>().speed = 0;
+        gridGraph.center = Vector3.Scale(transform.position,new Vector3(1,0,1));
         ramp.SetActive(true);
         AstarPath.active.Scan();
     }
@@ -59,9 +60,8 @@ public class Bus : MonoBehaviour
     private IEnumerator StartEngineCourutine()
     {
         yield return new WaitForSeconds(4f);
-        Debug.Log("BrumBrum"); //Viene elaborata più volte perchè viene chiamata più volte startEngine()
         isMooving = true;
-        GetComponent<PathFollower>().speed =speed ;
+        GetComponent<PathFollower>().speed =currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
         ramp.SetActive(false);
 
     }

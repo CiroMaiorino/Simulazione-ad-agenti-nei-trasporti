@@ -8,7 +8,7 @@ public class SpawningArea : MonoBehaviour
 
     public Vector3 size;
     [Range(0,15),SerializeField] private int avaragePendolars=0;
-
+    public int restartSpeed;
     public int AvaragePendolars { get => avaragePendolars; set => avaragePendolars = value; }
 
     // Start is called before the first frame update

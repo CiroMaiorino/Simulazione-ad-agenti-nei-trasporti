@@ -31,7 +31,7 @@ public class ClockUI : MonoBehaviour {
 
         string hoursString = Mathf.Floor(dayNormalized * hoursPerDay).ToString("00");
 
-        float minutesPerHour = 30f;
+        float minutesPerHour = 60f;
         string minutesString = Mathf.Floor(((dayNormalized * hoursPerDay) % 1f) * minutesPerHour).ToString("00");
 
         timeText.text = hoursString + ":" + minutesString;

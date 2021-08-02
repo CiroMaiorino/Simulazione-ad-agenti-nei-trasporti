@@ -9,6 +9,7 @@ public class Stop : MonoBehaviour
     private Bus bus;
     private List<Agent> pendular;
     private GameObject busStop;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -1,0 +1,7 @@
+User Manual: https://timersandclocks.turnthegameon.com/
+Discussion Forum: https://forum.unity.com/threads/timers-clocks.346408/
+
+Demo location: Assets\TurnTheGameOn\TimerAndClocks\Demos
+Prefab location: Assets\TurnTheGameOn\TimerAndClocks\Prefabs
+
+Thank you for purchasing Timers & Clocks, please leave a review to provide feedback.

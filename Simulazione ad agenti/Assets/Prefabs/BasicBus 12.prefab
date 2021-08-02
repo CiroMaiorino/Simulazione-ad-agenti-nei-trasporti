@@ -13992,7 +13992,6 @@ MonoBehaviour:
   TargetParent: {fileID: 7266510120543979039}
   maxPassengers: 12
   currentStop: {fileID: 0}
-  speed: 5
 --- !u!114 &1914398240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14007,7 +14006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
-  speed: 30
+  speed: 10
 --- !u!54 &1223030599
 Rigidbody:
   m_ObjectHideFlags: 0
