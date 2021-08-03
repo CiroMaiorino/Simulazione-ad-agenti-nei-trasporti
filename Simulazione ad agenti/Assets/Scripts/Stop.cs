@@ -3,13 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class Stop : MonoBehaviour
 {
     private Bus bus;
     private List<Agent> pendular;
     private GameObject busStop;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,7 @@ public class Stop : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        String colliderTag=collider.gameObject.tag;
+        String colliderTag = collider.gameObject.tag;
         if (colliderTag == "StopTrigger")
         {
             bus.currentStop = collider.transform.parent.gameObject;
@@ -45,10 +45,10 @@ public class Stop : MonoBehaviour
         {
             bus.StopEngine();
             if (!CheckGetOff(busStop))
-                foreach (Agent agent in pendular)
-                {
-                    agent.TakeBus();
-                }
+            {
+                    StartCoroutine(TakeBusCoroutine());
+            }
+                
         }
     }
 
@@ -67,4 +67,28 @@ public class Stop : MonoBehaviour
         return false;
     }
 
+
+
+    private IEnumerator TakeBusCoroutine()
+    {
+        int w = 0;
+        while (w <= pendular.Count)
+        {
+            if (pendular.Count - w < 4)
+            {
+                pendular.GetRange(w, pendular.Count - w).ForEach(x => x.TakeBus());
+            }
+
+            else
+            {
+                pendular.GetRange(w, 4).ForEach(x => x.TakeBus());
+            }
+            if (w + 4 > pendular.Count)
+                w = pendular.Count;
+
+            w += 4;
+            yield return new WaitForSeconds(4f);
+        }
+
+    }
 }

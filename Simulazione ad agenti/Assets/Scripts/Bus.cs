@@ -55,9 +55,9 @@ public class Bus : MonoBehaviour
 
     public void StartEngine()
     {
-        StartCoroutine("StartEngineCourutine");
+        StartCoroutine("StartEngineCuroutine");
     }
-    private IEnumerator StartEngineCourutine()
+    private IEnumerator StartEngineCuroutine()
     {
         yield return new WaitForSeconds(4f);
         isMooving = true;
