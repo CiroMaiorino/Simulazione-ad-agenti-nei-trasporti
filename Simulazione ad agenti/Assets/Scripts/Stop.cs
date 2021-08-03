@@ -9,10 +9,11 @@ public class Stop : MonoBehaviour
     private Bus bus;
     private List<Agent> pendular;
     private GameObject busStop;
-
+    private GameControl gameControl;
     // Start is called before the first frame update
     void Start()
     {
+        gameControl = FindObjectOfType<GameControl>();
         bus = transform.parent.transform.parent.GetComponent<Bus>();
     }
     private void OnTriggerEnter(Collider collider)
@@ -36,6 +37,10 @@ public class Stop : MonoBehaviour
 
             SeatsCheck();
 
+        }
+        if (colliderTag == "NewRun")
+        {
+             gameControl.SpawningAtStops();
         }
     }
 

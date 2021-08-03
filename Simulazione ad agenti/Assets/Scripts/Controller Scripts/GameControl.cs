@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using PathCreation.Examples;
-
+using System.Text.RegularExpressions;
 
 public class GameControl : MonoBehaviour
 {
@@ -55,7 +55,7 @@ public class GameControl : MonoBehaviour
     /// <summary>
     /// Spawn agents at all stop station
     /// </summary>
-    private void SpawningAtStops()
+    public void SpawningAtStops()
     {
         
         List<SpawningArea> areas = new List<SpawningArea>();
@@ -83,7 +83,8 @@ public class GameControl : MonoBehaviour
             Random.Range(-area.size.z / 2, area.size.z / 2));
 
         agentPrefab.bus = bus;
-        agentPrefab.Mystop = Random.Range(1, stops.Count + 1);
+        int stopNumber= System.Int32.Parse(Regex.Match(stop.name, @"\d+$").Value);
+        agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
         if (Utility<Transform>.Infected(ContagiousPercentage))
         {
             agentPrefab.State = Agent.States.Contagious;
