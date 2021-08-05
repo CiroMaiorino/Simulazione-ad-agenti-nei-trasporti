@@ -17,9 +17,13 @@ public class GameControl : MonoBehaviour
     /// Percantage of initial contagious agent
     /// </summary>
     [SerializeField, Range(0, 100)] int ContagiousPercentage;
+   [SerializeField] int aTot, aCont, aH, aInf;
 
-    
-  
+    public int ATot { get => aTot; set => aTot = value; }
+    public int ACont { get => aCont; set => aCont = value; }
+    public int AH { get => aH; set => aH = value; }
+    public int AInf { get => aInf; set => aInf = value; }
+
     void Start()
     {
         stops = Utility<Transform>.GetAllChildren(busStops);
@@ -77,6 +81,7 @@ public class GameControl : MonoBehaviour
     /// <param name="area"> area where spawn the agent</param>
     private void SpawnAgent(SpawningArea area)
     {
+        aTot++;
         Transform stop = area.transform.parent;
         Vector3 position = area.transform.position + new Vector3(Random.Range(-area.size.x / 2, area.size.x / 2),
             0,
@@ -88,6 +93,7 @@ public class GameControl : MonoBehaviour
         if (Utility<Transform>.Infected(ContagiousPercentage))
         {
             agentPrefab.State = Agent.States.Contagious;
+            aCont++;
         }
         else
         {
@@ -125,5 +131,14 @@ public class GameControl : MonoBehaviour
             setTime(3);
         if (Input.GetKeyDown(KeyCode.Alpha0))
             setTime(0.5f);
+    }
+
+    public void addHealthy()
+    {
+        aH++;
+    }
+    public void addInfected()
+    {
+        aInf++;
     }
 }

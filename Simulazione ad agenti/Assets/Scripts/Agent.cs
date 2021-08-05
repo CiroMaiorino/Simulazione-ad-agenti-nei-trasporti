@@ -33,13 +33,14 @@ public class Agent : MonoBehaviour
     private float elapsedTime=0f;
     private Material material;
     private GameObject particlesSystem;
+    private GameControl gameControl;
     public enum States
     {
        Healthy,
         Infected,
         Contagious
     }
-    public States State;
+    [HideInInspector] public States State;
     [SerializeField] private int mystop;
 
     public int Mystop { get => mystop; set => mystop = value; }
@@ -58,7 +59,9 @@ public class Agent : MonoBehaviour
         particlesSystem = GetComponentInChildren<Illness>().gameObject;
 
         particlesSystem.SetActive(false);
+        gameControl = FindObjectOfType<GameControl>();
         Contagious();
+        
     }
     public void TakeBus()
     {
@@ -97,7 +100,10 @@ public class Agent : MonoBehaviour
             else {
                 Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
                 stop.SeatsCheck();
-                Destroy(gameObject); 
+                Destroy(gameObject);
+
+                if (State == States.Healthy)
+                    gameControl.addHealthy();
             }
         }
         
@@ -154,6 +160,8 @@ public class Agent : MonoBehaviour
     }
     public void Infected()
     {
+        State = States.Infected;
+        gameControl.addInfected();
         material.color = Color.yellow;
         GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
     }
