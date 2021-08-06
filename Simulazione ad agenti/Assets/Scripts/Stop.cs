@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TurnTheGameOn.Timer;
 public class Stop : MonoBehaviour
 {
     private Bus bus;
@@ -57,6 +58,7 @@ public class Stop : MonoBehaviour
         }
         if (colliderTag == "NewRun")
         {
+            FindObjectOfType<Timer>().AddTime(600);
             bus.Returning = false;
             gameControl.SpawningAtStops();
         }
