@@ -9,6 +9,7 @@ TagManager:
   - StopTrigger
   - Agent
   - NewRun
+  - StopTriggerR
   layers:
   - Default
   - TransparentFX

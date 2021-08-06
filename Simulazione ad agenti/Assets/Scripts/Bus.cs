@@ -29,9 +29,11 @@ public class Bus : MonoBehaviour
     public GameObject currentStop;
     private GameObject passengers;
     private GridGraph gridGraph;
+    private bool returning;
     public Target Exit { get => exit;}
     public List<Target> Seats { get => seats; set => seats = value; }
     public GameObject Passengers { get => passengers; set => passengers = value; }
+    public bool Returning { get => returning; set => returning = value; }
 
     private void Start() {
         Seats = Utility<Target>.GetAllChildren(TargetParent);
@@ -41,6 +43,7 @@ public class Bus : MonoBehaviour
         ramp=GameObject.Find("Ramp");
         ramp.SetActive(false);
         Passengers = GameObject.Find("Passengers");
+        returning = false;
     }
   
   

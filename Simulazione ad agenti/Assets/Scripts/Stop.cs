@@ -38,9 +38,27 @@ public class Stop : MonoBehaviour
             SeatsCheck();
 
         }
+        else if (colliderTag == "StopTriggerR")
+        {
+            bus.Returning = true;
+            bus.currentStop = collider.transform.parent.gameObject;
+            busStop = collider.gameObject.transform.parent.gameObject;
+            pendular = Utility<Agent>.GetAllChildren(busStop);
+            List<Agent> passengers = Utility<Agent>.GetAllChildren(bus.Passengers);
+
+            foreach (Agent agent in passengers)
+            {
+                if (busStop.name == "BusStop" + agent.Mystop)
+                {
+                    bus.StopEngine();
+                    agent.GetOff();
+                }
+            }
+        }
         if (colliderTag == "NewRun")
         {
-             gameControl.SpawningAtStops();
+            bus.Returning = false;
+            gameControl.SpawningAtStops();
         }
     }
 
