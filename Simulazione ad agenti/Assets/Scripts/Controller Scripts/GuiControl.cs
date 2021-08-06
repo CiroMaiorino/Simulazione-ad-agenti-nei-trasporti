@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GuiControl : MonoBehaviour
 {
-    public Button b05f, b1, b2, b3, pause;
+    public Button b05f, b1, b2, b3,b5,b10, pause;
     public Text aTot, aCont, aH, aInf;
     private GameControl gameControl;
     
@@ -14,6 +14,7 @@ public class GuiControl : MonoBehaviour
         b1.onClick.AddListener(() => Time.timeScale = 1);
         b2.onClick.AddListener(() => Time.timeScale = 2);
         b3.onClick.AddListener(() => Time.timeScale = 3);
+        b5.onClick.AddListener(() => Time.timeScale = 5);
         pause.onClick.AddListener(() => Time.timeScale = 0);
         gameControl = FindObjectOfType<GameControl>();
     }
