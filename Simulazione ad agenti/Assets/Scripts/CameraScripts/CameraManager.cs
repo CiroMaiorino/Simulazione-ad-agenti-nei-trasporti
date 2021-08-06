@@ -35,6 +35,8 @@ public class CameraManager : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         cam.transform.localPosition = new Vector3(0f, Mathf.Abs(cameraOffset.y), -Mathf.Abs(cameraOffset.x));
         zoomStrategy = new OrthographicZoomStrategy(cam,startingZoom);
+       /* zoomStrategy = cam.orthographic ?(IZoomStrategy) new OrthographicZoomStrategy(cam, startingZoom) :
+            new PerspectiveZoomStategy(cam, cameraOffset, startingZoom);*/
         cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
     }
     private void Update()
@@ -48,7 +50,11 @@ public class CameraManager : MonoBehaviour
         KeyboardInputManager.OnMoveInput += UpdateFrameMove;
         KeyboardInputManager.OnRotateInput += UpdateFrameRotate;
         KeyboardInputManager.OnZoomInput += UpdateFrameZoom;
-        
+        MouseInputManager.OnMoveInput += UpdateFrameMove;
+        MouseInputManager.OnRotateInput += UpdateFrameRotate;
+        MouseInputManager.OnZoomInput += UpdateFrameZoom;
+
+
     }
 
     private void OnDisable()
@@ -56,6 +62,9 @@ public class CameraManager : MonoBehaviour
         KeyboardInputManager.OnMoveInput -= UpdateFrameMove;
         KeyboardInputManager.OnRotateInput -= UpdateFrameRotate;
         KeyboardInputManager.OnZoomInput -= UpdateFrameZoom;
+        MouseInputManager.OnMoveInput -= UpdateFrameMove;
+        MouseInputManager.OnRotateInput -= UpdateFrameRotate;
+        MouseInputManager.OnZoomInput -= UpdateFrameZoom;
     }
 
     private void UpdateFrameZoom(float zoomAmount)
