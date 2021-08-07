@@ -10,6 +10,7 @@ TagManager:
   - Agent
   - NewRun
   - StopTriggerR
+  - Speed
   layers:
   - Default
   - TransparentFX

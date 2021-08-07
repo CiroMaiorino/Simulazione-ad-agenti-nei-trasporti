@@ -14,6 +14,7 @@ public class Stop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError((FindObjectOfType<Timer>().GetTimerValue() - (20 * 60)) % 3600);
         gameControl = FindObjectOfType<GameControl>();
         bus = transform.parent.transform.parent.GetComponent<Bus>();
     }
@@ -56,9 +57,18 @@ public class Stop : MonoBehaviour
                 }
             }
         }
+        else if(colliderTag == "Speed")
+        {
+            bus.GetComponent<PathFollower>().speed = 5;
+        }
         if (colliderTag == "NewRun")
         {
-            FindObjectOfType<Timer>().AddTime(600);
+            Timer timer = FindObjectOfType<Timer>();
+            if(((timer.GetTimerValue() - (20 * 60)) % 3600)!= 0)
+                timer.AddTime(3600-(timer.GetTimerValue() - (20 * 60)) % 3600);
+
+            timer.AddTime(600);
+           
             bus.Returning = false;
             gameControl.SpawningAtStops();
         }

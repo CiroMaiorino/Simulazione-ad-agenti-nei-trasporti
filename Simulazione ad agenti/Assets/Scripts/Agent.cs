@@ -136,7 +136,7 @@ public class Agent : MonoBehaviour
         animator.SetBool("Waiting", true);
         animator.SetBool("Sit", true);
 
-
+        transform.position = target.transform.position;
         bool isRotated = (transform.rotation.y - bus.transform.rotation.y) <= 0.1;
         bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
 
