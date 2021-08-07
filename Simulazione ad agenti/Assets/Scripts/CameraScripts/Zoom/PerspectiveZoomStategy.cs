@@ -10,7 +10,7 @@ public class PerspectiveZoomStategy : IZoomStrategy
 
     public PerspectiveZoomStategy(Camera cam, Vector3 offset, float startingZoom)
     {
-        normalizedCameraPosition = new Vector3(0f, Mathf.Abs(offset.y), Mathf.Abs(offset.x));
+        normalizedCameraPosition = new Vector3(0f, Mathf.Abs(offset.y), -Mathf.Abs(offset.x)).normalized;
         currentZoomLevel = startingZoom;
         PositionCamera(cam);
 
@@ -30,8 +30,8 @@ public class PerspectiveZoomStategy : IZoomStrategy
 
     public void ZoomOut(Camera cam, float delta, float farZoomLimit)
     {
-        if (currentZoomLevel <= farZoomLimit) return;
-        currentZoomLevel = Mathf.Max(currentZoomLevel + delta, farZoomLimit);
+        if (currentZoomLevel >= farZoomLimit) return;
+        currentZoomLevel = Mathf.Min(currentZoomLevel + delta, farZoomLimit);
         PositionCamera(cam);
     }
 }
