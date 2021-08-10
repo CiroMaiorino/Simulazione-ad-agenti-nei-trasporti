@@ -11,10 +11,10 @@ public class Stop : MonoBehaviour
     private List<Agent> pendular;
     private GameObject busStop;
     private GameControl gameControl;
+    private int runNumber =1;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogError((FindObjectOfType<Timer>().GetTimerValue() - (20 * 60)) % 3600);
         gameControl = FindObjectOfType<GameControl>();
         bus = transform.parent.transform.parent.GetComponent<Bus>();
     }
@@ -64,11 +64,30 @@ public class Stop : MonoBehaviour
         if (colliderTag == "NewRun")
         {
             Timer timer = FindObjectOfType<Timer>();
-            if(((timer.GetTimerValue() - (20 * 60)) % 3600)!= 0)
-                timer.AddTime(3600-(timer.GetTimerValue() - (20 * 60)) % 3600);
+            runNumber += 1;
+            if (runNumber == 5)
+            {
+                timer.SetTimerValue(51000);
+            }
+            else if (runNumber < 5)
+            {
+                if (((timer.GetTimerValue() - (20 * 60)) % 3600) != 0)
+                    timer.AddTime(3600 - (timer.GetTimerValue() - (20 * 60)) % 3600);
 
-            timer.AddTime(600);
-           
+                timer.AddTime(600);
+            }
+            else if (runNumber > 5)
+            {
+                if ((timer.GetTimerValue() % 3600) != 0)
+                    timer.AddTime(3600 - (timer.GetTimerValue() % 3600));
+
+                timer.AddTime(600);
+            }
+            else if(runNumber == 8)
+            {
+                Time.timeScale = 0;
+            }
+
             bus.Returning = false;
             gameControl.SpawningAtStops();
         }
