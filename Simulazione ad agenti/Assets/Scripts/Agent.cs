@@ -69,7 +69,7 @@ public class Agent : MonoBehaviour
     {
         /* If the bus is not moving and there are free seats the agents will set
       their target to one of the free seat. */
-        if (!bus.isMooving && bus.FreeTarget() != null)
+        if (!bus.isMooving && bus.FreeTarget() != null && target== null)
         {
             animator.SetBool("Waiting", false);
             target = bus.FreeTarget();

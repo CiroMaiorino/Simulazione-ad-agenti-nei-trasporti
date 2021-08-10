@@ -65,7 +65,11 @@ public class Stop : MonoBehaviour
         {
             Timer timer = FindObjectOfType<Timer>();
             runNumber += 1;
-            if (runNumber == 5)
+            if (runNumber == 8)
+            {
+                Time.timeScale = 0;
+            }
+            else if (runNumber == 5)
             {
                 timer.SetTimerValue(51000);
             }
@@ -76,17 +80,14 @@ public class Stop : MonoBehaviour
 
                 timer.AddTime(600);
             }
-            else if (runNumber > 5)
+            else if (runNumber > 5 && runNumber < 8)
             {
                 if ((timer.GetTimerValue() % 3600) != 0)
                     timer.AddTime(3600 - (timer.GetTimerValue() % 3600));
 
                 timer.AddTime(600);
             }
-            else if(runNumber == 8)
-            {
-                Time.timeScale = 0;
-            }
+
 
             bus.Returning = false;
             gameControl.SpawningAtStops();
