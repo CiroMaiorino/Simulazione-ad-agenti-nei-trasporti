@@ -9,7 +9,7 @@ public class Target : MonoBehaviour
     /// <summary>
     ///Parameter that indicates if the seat is Occupied with his get and set methods. 
     /// </summary>
-    private bool isOccupied;
+    [SerializeField]private bool isOccupied;
 
     public bool IsOccupied { get => isOccupied; set => isOccupied = value; }
 }

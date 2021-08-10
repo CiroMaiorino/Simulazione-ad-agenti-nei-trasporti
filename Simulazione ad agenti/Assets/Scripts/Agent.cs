@@ -34,6 +34,7 @@ public class Agent : MonoBehaviour
     private Material material;
     private GameObject particlesSystem;
     private GameControl gameControl;
+    private GameObject rigidCube;
     public enum States
     {
        Healthy,
@@ -53,6 +54,7 @@ public class Agent : MonoBehaviour
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
         aiPath = GetComponent<AIPath>();
+        rigidCube = GetComponentInChildren<SphereCollider>().gameObject;
         /* Instance of the animator from the agent. */
         animator = this.GetComponentInChildren<Animator>();
         material = GetComponentInChildren<Transform>().GetComponentInChildren<Renderer>().material;
@@ -97,17 +99,20 @@ public class Agent : MonoBehaviour
         if(ai.reachedDestination){
             if (bus.Seats.Contains(target))
                 SitDown();
-            else {
-                Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
-                stop.SeatsCheck();
-                Destroy(gameObject);
-
-                if (State == States.Healthy)
-                    gameControl.addHealthy();
-            }
+            
         }
         
         
+    }
+
+    public void Exiting()
+    {
+        Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
+        stop.SeatsCheck();
+        Destroy(gameObject);
+
+        if (State == States.Healthy)
+            gameControl.addHealthy();
     }
 
     /// <summary>
@@ -126,7 +131,10 @@ public class Agent : MonoBehaviour
     public void SetDestination(Target t){
         target = t;
         destinationSetter.target=t.transform;
-        t.IsOccupied=true;
+        if (t != bus.Exit)
+        { t.IsOccupied = true;
+         
+        }
     }
 
     private void SitDown()
@@ -135,7 +143,7 @@ public class Agent : MonoBehaviour
         StartCoroutine(RotateOnSpot());
         animator.SetBool("Waiting", true);
         animator.SetBool("Sit", true);
-
+        rigidCube.tag = "Exiting";
         transform.position = target.transform.position;
         bool isRotated = (transform.rotation.y - bus.transform.rotation.y) <= 0.1;
         bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
