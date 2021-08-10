@@ -11,6 +11,7 @@ TagManager:
   - NewRun
   - StopTriggerR
   - Speed
+  - Exiting
   layers:
   - Default
   - TransparentFX
