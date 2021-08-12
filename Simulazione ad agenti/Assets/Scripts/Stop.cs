@@ -134,9 +134,9 @@ public class Stop : MonoBehaviour
 
     private IEnumerator TakeBusCoroutine()
     {
-        pendular.ForEach(x => x.TakeBus());
-        yield return null;
-       /* int w = 0;
+        //pendular.ForEach(x => x.TakeBus());
+        //yield return null;
+       int w = 0;
         while (w <= pendular.Count)
         {
             if (pendular.Count - w < 4)
@@ -154,6 +154,6 @@ public class Stop : MonoBehaviour
             w += 4;
             yield return new WaitForSeconds(4f);
         }
-       */
+       
     }
 }

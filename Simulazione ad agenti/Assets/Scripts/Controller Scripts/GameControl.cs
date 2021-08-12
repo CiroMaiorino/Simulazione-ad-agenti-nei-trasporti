@@ -29,7 +29,7 @@ public class GameControl : MonoBehaviour
     private void Awake()
     {
         if(resetGames)
-         PlayerPrefs.SetInt("TimesLaunched", 1);
+         PlayerPrefs.SetInt("TimesLaunched", 0);
         PlayerPrefs.SetInt("TimesLaunched", PlayerPrefs.GetInt("TimesLaunched") + 1);
         
     }
