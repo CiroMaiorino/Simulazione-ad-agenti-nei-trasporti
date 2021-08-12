@@ -80,9 +80,13 @@ public class GameControl : MonoBehaviour
     /// </summary>
     public void SpawningAtStops()
     {
-        
         List<SpawningArea> areas = new List<SpawningArea>();
-        foreach (Transform stop in stops) areas.Add(stop.GetComponentInChildren<SpawningArea>());
+        foreach (Transform stop in stops)
+        {
+            List<SpawningArea> spawnAreas=Utility<SpawningArea>.GetAllChildren(stop.gameObject);
+            areas.Add(spawnAreas[0]);
+            areas.Add(spawnAreas[1]);
+        }
         foreach (SpawningArea area in areas)
         {
             
