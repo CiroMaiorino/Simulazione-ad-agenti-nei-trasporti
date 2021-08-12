@@ -11,7 +11,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] GameObject busStops;
     [SerializeField] Agent agentPrefab;
     private List<Transform> stops;
-    
+    public CSVWriter writer;
+    [SerializeField] private bool resetGames;
     [SerializeField, Range(0, 100)] int InfectionPercentage;
     /// <summary>
     /// Percantage of initial contagious agent
@@ -24,12 +25,28 @@ public class GameControl : MonoBehaviour
     public int AH { get => aH; set => aH = value; }
     public int AInf { get => aInf; set => aInf = value; }
 
+
+    private void Awake()
+    {
+        if(resetGames)
+         PlayerPrefs.SetInt("TimesLaunched", 1);
+        PlayerPrefs.SetInt("TimesLaunched", PlayerPrefs.GetInt("TimesLaunched") + 1);
+        
+    }
+
     void Start()
     {
+        
+      
         stops = Utility<Transform>.GetAllChildren(busStops);
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
         SpawningAtStops();
+        int timesLaunched = PlayerPrefs.GetInt("TimesLaunched");
+        writer = new CSVWriter(this,"stat"+timesLaunched+".csv");
+        writer.createFile();
     }
+
+   
 
     void Update()
     {
@@ -142,5 +159,13 @@ public class GameControl : MonoBehaviour
     public void addInfected()
     {
         aInf++;
+    }
+
+    public void ResetStats()
+    {
+        aCont = 0;
+        aH = 0;
+        aInf = 0;
+        aTot = 0;
     }
 }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TurnTheGameOn.Timer;
+
+
 public class Stop : MonoBehaviour
 {
     private Bus bus;
@@ -63,6 +65,10 @@ public class Stop : MonoBehaviour
         }
         if (colliderTag == "NewRun")
         {
+            gameControl.writer.writeStat();
+            gameControl.ResetStats();
+            
+
             Timer timer = FindObjectOfType<Timer>();
             runNumber += 1;
             if (runNumber == 8)
@@ -93,6 +99,8 @@ public class Stop : MonoBehaviour
             gameControl.SpawningAtStops();
         }
     }
+
+
 
     public void SeatsCheck()
     {
@@ -126,7 +134,9 @@ public class Stop : MonoBehaviour
 
     private IEnumerator TakeBusCoroutine()
     {
-        int w = 0;
+        pendular.ForEach(x => x.TakeBus());
+        yield return null;
+       /* int w = 0;
         while (w <= pendular.Count)
         {
             if (pendular.Count - w < 4)
@@ -144,6 +154,6 @@ public class Stop : MonoBehaviour
             w += 4;
             yield return new WaitForSeconds(4f);
         }
-
+       */
     }
 }
