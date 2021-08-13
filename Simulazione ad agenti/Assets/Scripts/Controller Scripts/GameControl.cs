@@ -104,10 +104,10 @@ public class GameControl : MonoBehaviour
     {
         aTot++;
         Transform stop = area.transform.parent;
-        Vector3 position = area.transform.position + new Vector3(Random.Range(-area.size.x / 2, area.size.x / 2),
+        Vector3 positionChanger = new Vector3(Random.Range(-area.size.x / 2, area.size.x / 2),
             0,
             Random.Range(-area.size.z / 2, area.size.z / 2));
-
+        
         agentPrefab.bus = bus;
         int stopNumber= System.Int32.Parse(Regex.Match(stop.name, @"\d+$").Value);
         if(area.gameObject.name.EndsWith("R"))
@@ -118,7 +118,9 @@ public class GameControl : MonoBehaviour
             else agentPrefab.Mystop = number;
         }
 
-        else agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
+        else 
+            agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
+       
         if (Utility<Transform>.Infected(ContagiousPercentage))
         {
             agentPrefab.State = Agent.States.Contagious;
@@ -130,9 +132,17 @@ public class GameControl : MonoBehaviour
             agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
 
         }
-        Instantiate(agentPrefab.gameObject, position, Quaternion.identity).transform.parent = area.transform;
+        
+
+        GameObject agentSpawned=Instantiate(agentPrefab.gameObject, area.transform.position, Quaternion.identity);
+        agentSpawned.transform.parent = area.transform;
+        agentSpawned.transform.localPosition += positionChanger;
+
     }
    
+
+
+
     public void Pause()
     {
         Time.timeScale = 0;
