@@ -25,43 +25,14 @@ public class Stop : MonoBehaviour
         String colliderTag = collider.gameObject.tag;
         if (colliderTag == "StopTrigger")
         {
-            bus.currentStop = collider.transform.parent.gameObject;
-            busStop = collider.gameObject.transform.parent.gameObject;
-            pendular = Utility<Agent>.GetAllChildren(busStop);
-            List<Agent> passengers = Utility<Agent>.GetAllChildren(bus.Passengers);
-
-            foreach (Agent agent in passengers)
-            {
-                if (busStop.name == "BusStop" + agent.Mystop)
-                {
-                    bus.StopEngine();
-                    agent.GetOff();
-                }
-            }
-
-            SeatsCheck();
+            Onstop(collider, bus.Returning);
 
         }
         else if (colliderTag == "StopTriggerR")
         {
             bus.Returning = true;
-            bus.currentStop = collider.transform.parent.gameObject;
-            busStop = collider.gameObject.transform.parent.gameObject;
-            pendular = Utility<Agent>.GetAllChildren(busStop);
-            List<Agent> passengers = Utility<Agent>.GetAllChildren(bus.Passengers);
-
-            foreach (Agent agent in passengers)
-            {
-                if (busStop.name == "BusStop" + agent.Mystop)
-                {
-                    bus.StopEngine();
-                    agent.GetOff();
-                }
-            }
-        }
-        else if(colliderTag == "Speed")
-        {
-            bus.GetComponent<PathFollower>().speed = 5;
+           
+            Onstop(collider, bus.Returning);
         }
         if (colliderTag == "NewRun")
         {
@@ -155,5 +126,23 @@ public class Stop : MonoBehaviour
             yield return new WaitForSeconds(4f);
         }
        
+    }
+    private void Onstop(Collider collider, bool returning)
+    {
+        bus.currentStop = collider.transform.parent.gameObject;
+        busStop = collider.gameObject.transform.parent.gameObject;
+        SpawningArea area = bus.getArea();
+        pendular = Utility<Agent>.GetAllChildren(area.gameObject);
+        List<Agent> passengers = Utility<Agent>.GetAllChildren(bus.Passengers);
+        foreach (Agent agent in passengers)
+        {
+            if (busStop.name == "BusStop" + agent.Mystop)
+            {
+                bus.StopEngine();
+                agent.GetOff();
+            }
+        }
+
+        SeatsCheck();
     }
 }

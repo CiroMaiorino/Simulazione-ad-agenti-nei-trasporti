@@ -52,9 +52,7 @@ public class GameControl : MonoBehaviour
     {
         int actualPassengersNumber = Utility<Agent>.GetAllChildren(bus.Passengers).Count;
         if (bus.GetComponent<PathFollower>().speed == 0)
-            if ((Utility<Agent>.GetAllChildren(bus.currentStop).Count == 0 || actualPassengersNumber == bus.maxPassengers) && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
-                bus.StartEngine();
-            else if (bus.Returning && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
+            if ((Utility<Agent>.GetAllChildren(bus.getArea().gameObject).Count == 0 || actualPassengersNumber == bus.maxPassengers) && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
                 bus.StartEngine();
         TimeInputs();
     }
@@ -112,7 +110,15 @@ public class GameControl : MonoBehaviour
 
         agentPrefab.bus = bus;
         int stopNumber= System.Int32.Parse(Regex.Match(stop.name, @"\d+$").Value);
-        agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
+        if(area.gameObject.name.EndsWith("R"))
+        {
+            int number = (Mathf.Abs(stopNumber - Random.Range(1, 4)));
+            if (number == 0)
+                agentPrefab.Mystop = number + 1;
+            else agentPrefab.Mystop = number;
+        }
+
+        else agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
         if (Utility<Transform>.Infected(ContagiousPercentage))
         {
             agentPrefab.State = Agent.States.Contagious;
@@ -124,7 +130,7 @@ public class GameControl : MonoBehaviour
             agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
 
         }
-        Instantiate(agentPrefab.gameObject, position, Quaternion.identity).transform.parent = stop;
+        Instantiate(agentPrefab.gameObject, position, Quaternion.identity).transform.parent = area.transform;
     }
    
     public void Pause()

@@ -64,9 +64,9 @@ public class Bus : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         isMooving = true;
-        GetComponent<PathFollower>().speed =currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
+        GetComponent<PathFollower>().speed =getArea().restartSpeed;
         ramp.SetActive(false);
-
+        
     }
     /// <summary>
     /// Return the first seat aviable.
@@ -80,8 +80,15 @@ public class Bus : MonoBehaviour
         }
         return null;
     }
-
-    
-    
-
+    public SpawningArea getArea()
+    {
+        SpawningArea area;
+        if (Returning)
+             area = Utility<SpawningArea>.GetAllChildren(currentStop)[1];
+        else 
+             area = Utility<SpawningArea>.GetAllChildren(currentStop)[0];
+        
+        return area;
+    }
 }
+

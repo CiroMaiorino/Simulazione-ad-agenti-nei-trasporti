@@ -131,6 +131,7 @@ public class Agent : MonoBehaviour
     public void SetDestination(Target t){
         target = t;
         destinationSetter.target=t.transform;
+        transform.parent = bus.Passengers.transform;
         if (t != bus.Exit)
         { t.IsOccupied = true;
          
@@ -154,7 +155,7 @@ public class Agent : MonoBehaviour
 
             aiPath.enabled = false;
         }
-        transform.parent = bus.Passengers.transform;
+        
     }
 
     public void Contagious()
@@ -171,6 +172,7 @@ public class Agent : MonoBehaviour
         State = States.Infected;
         gameControl.addInfected();
         material.color = Color.yellow;
-        GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
+        if(GetComponentInChildren<ColliderCovid>()!=null)
+         GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
     }
 }
