@@ -115,6 +115,8 @@ public class GameControl : MonoBehaviour
             int number = (Mathf.Abs(stopNumber - Random.Range(1, 4)));
             if (number == 0)
                 agentPrefab.Mystop = number + 1;
+            else if (number == 8 || number == 6)
+                agentPrefab.Mystop = number - 1;
             else agentPrefab.Mystop = number;
         }
 
