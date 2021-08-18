@@ -123,7 +123,7 @@ public class Stop : MonoBehaviour
                 w = pendular.Count;
 
             w += 4;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(5f);
         }
        
     }

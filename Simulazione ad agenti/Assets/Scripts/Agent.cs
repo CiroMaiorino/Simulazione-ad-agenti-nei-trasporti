@@ -49,7 +49,6 @@ public class Agent : MonoBehaviour
 
     private void Start()
     {
-        
         /* Instance of objects Declared before. */
         destinationSetter = GetComponent<AIDestinationSetter>();
         ai = GetComponent<IAstarAI>();
@@ -142,6 +141,7 @@ public class Agent : MonoBehaviour
     {
         
         StartCoroutine(RotateOnSpot());
+        aiPath.enabled = false;
         animator.SetBool("Waiting", true);
         animator.SetBool("Sit", true);
         rigidCube.tag = "Exiting";
@@ -153,7 +153,7 @@ public class Agent : MonoBehaviour
         {
             gameObject.AddComponent<Rigidbody>().freezeRotation = true;
 
-            aiPath.enabled = false;
+            
         }
         
     }
