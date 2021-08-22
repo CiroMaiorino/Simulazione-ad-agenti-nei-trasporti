@@ -23,6 +23,7 @@ public class PerspectiveZoomStategy : IZoomStrategy
 
     public void ZoomIn(Camera cam, float delta, float nearZoomLimit)
     {
+        Debug.LogError(currentZoomLevel);
         if (currentZoomLevel <= nearZoomLimit) return;
         currentZoomLevel = Mathf.Max(currentZoomLevel - delta, nearZoomLimit);
         PositionCamera(cam);
@@ -30,6 +31,7 @@ public class PerspectiveZoomStategy : IZoomStrategy
 
     public void ZoomOut(Camera cam, float delta, float farZoomLimit)
     {
+        Debug.LogError(currentZoomLevel);
         if (currentZoomLevel >= farZoomLimit) return;
         currentZoomLevel = Mathf.Min(currentZoomLevel + delta, farZoomLimit);
         PositionCamera(cam);
