@@ -77,10 +77,12 @@ public class Stop : MonoBehaviour
     {
         if (pendular.Count != 0)
         {
-            bus.StopEngine();
+           
             if (!CheckGetOff(busStop))
             {
-                    StartCoroutine(TakeBusCoroutine());
+                if (bus.GetComponent<PathFollower>().speed != 0)
+                    bus.StopEngine();
+                StartCoroutine(TakeBusCoroutine());
             }
                 
         }
@@ -138,7 +140,8 @@ public class Stop : MonoBehaviour
         {
             if (busStop.name == "BusStop" + agent.Mystop)
             {
-                bus.StopEngine();
+               if(bus.GetComponent<PathFollower>().speed!=0)
+                    bus.StopEngine();
                 agent.GetOff();
             }
         }

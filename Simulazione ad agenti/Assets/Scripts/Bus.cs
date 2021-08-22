@@ -52,6 +52,7 @@ public class Bus : MonoBehaviour
         isMooving = false;
         GetComponent<PathFollower>().speed = 0;
         gridGraph.center = Vector3.Scale(transform.position,new Vector3(1,0,1));
+        gridGraph.rotation =transform.localEulerAngles;
         ramp.SetActive(true);
         AstarPath.active.Scan();
     }
