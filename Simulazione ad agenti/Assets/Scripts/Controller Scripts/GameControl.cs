@@ -13,7 +13,7 @@ public class GameControl : MonoBehaviour
     private List<Transform> stops;
     public CSVWriter writer;
     [SerializeField] private bool resetGames;
-    [SerializeField, Range(0, 100)] int InfectionPercentage;
+    [Range(0, 100)] public  int infectionPercentage;
     /// <summary>
     /// Percantage of initial contagious agent
     /// </summary>
@@ -24,7 +24,7 @@ public class GameControl : MonoBehaviour
     public int ACont { get => aCont; set => aCont = value; }
     public int AH { get => aH; set => aH = value; }
     public int AInf { get => aInf; set => aInf = value; }
-
+    
 
     private void Awake()
     {
@@ -131,8 +131,8 @@ public class GameControl : MonoBehaviour
         else
         {
             agentPrefab.State = Agent.States.Healthy;
-            agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = InfectionPercentage;
-
+            agentPrefab.GetComponentInChildren<ColliderCovid>().InfectionPercentage = infectionPercentage;
+            
         }
         
 

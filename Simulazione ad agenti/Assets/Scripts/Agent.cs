@@ -139,17 +139,21 @@ public class Agent : MonoBehaviour
 
     private void SitDown()
     {
-        
+        if (State == States.Healthy)
+        {
+            gameObject.AddComponent<ColliderCovid>();
+            GetComponent<ColliderCovid>().InfectionPercentage = gameControl.infectionPercentage;
+        }
         StartCoroutine(RotateOnSpot());
         aiPath.enabled = false;
         animator.SetBool("Waiting", true);
         animator.SetBool("Sit", true);
         rigidCube.tag = "Exiting";
+       
         transform.position = target.transform.position;
-        bool isRotated = (transform.rotation.y - bus.transform.rotation.y) <= 0.1;
         bool haveRigidBody = gameObject.GetComponent<Rigidbody>() != null;
 
-        if (isRotated && !haveRigidBody)
+        if (!haveRigidBody)
         {
             gameObject.AddComponent<Rigidbody>().freezeRotation = true;
 
@@ -165,6 +169,7 @@ public class Agent : MonoBehaviour
             material.color = Color.red;
             particlesSystem.SetActive(true);
             GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
+
         }
     }
     public void Infected()
@@ -172,7 +177,8 @@ public class Agent : MonoBehaviour
         State = States.Infected;
         gameControl.addInfected();
         material.color = Color.yellow;
-        if(GetComponentInChildren<ColliderCovid>()!=null)
-         GetComponentInChildren<ColliderCovid>().gameObject.SetActive(false);
+        Destroy(GetComponent<ColliderCovid>());
+        if (GetComponentInChildren<ColliderCovid>() != null)
+            Destroy(GetComponentInChildren<ColliderCovid>());
     }
 }

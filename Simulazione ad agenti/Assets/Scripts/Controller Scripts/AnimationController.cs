@@ -20,9 +20,5 @@ public class AnimationController : MonoBehaviour
         Destroy(agent.GetComponent<Rigidbody>());
         aiPath.enabled = true;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
