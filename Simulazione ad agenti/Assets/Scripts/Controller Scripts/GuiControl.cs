@@ -23,9 +23,9 @@ public class GuiControl : MonoBehaviour
     void Update()
     {
         aTot.text = "Agenti totali:" + gameControl.ATot;
-        aCont.text = "Agenti Contagiati:" + gameControl.ACont;
+        aCont.text = "Agenti Contagiosi:" + gameControl.ACont;
         aH.text = "Agenti Sani:" + gameControl.AH;
-        aInf.text = "Agenti Infetti:" + gameControl.AInf;
+        aInf.text = "Agenti Infettati:" + gameControl.AInf;
         
     }
 }
