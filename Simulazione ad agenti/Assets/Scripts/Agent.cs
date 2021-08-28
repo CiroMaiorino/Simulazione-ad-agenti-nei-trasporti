@@ -179,6 +179,6 @@ public class Agent : MonoBehaviour
         material.color = Color.yellow;
         Destroy(GetComponent<ColliderCovid>());
         if (GetComponentInChildren<ColliderCovid>() != null)
-            Destroy(GetComponentInChildren<ColliderCovid>().gameObject);
+            Destroy(GetComponentInChildren<ColliderCovid>());
     }
 }
