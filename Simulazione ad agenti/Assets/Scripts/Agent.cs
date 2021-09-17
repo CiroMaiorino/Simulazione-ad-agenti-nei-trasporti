@@ -35,6 +35,7 @@ public class Agent : MonoBehaviour
     private GameObject particlesSystem;
     private GameControl gameControl;
     private GameObject rigidCube;
+    private GameObject colliderCovid;
     public enum States
     {
        Healthy,
@@ -58,7 +59,7 @@ public class Agent : MonoBehaviour
         animator = this.GetComponentInChildren<Animator>();
         material = GetComponentInChildren<Transform>().GetComponentInChildren<Renderer>().material;
         particlesSystem = GetComponentInChildren<Illness>().gameObject;
-
+        colliderCovid = GetComponentInChildren<ColliderCovid>().gameObject;
         particlesSystem.SetActive(false);
         gameControl = FindObjectOfType<GameControl>();
         Contagious();
@@ -178,7 +179,7 @@ public class Agent : MonoBehaviour
         gameControl.addInfected();
         material.color = Color.yellow;
         Destroy(GetComponent<ColliderCovid>());
-        if (GetComponentInChildren<ColliderCovid>() != null)
-            Destroy(GetComponentInChildren<ColliderCovid>());
+        if (colliderCovid != null)
+            Destroy(colliderCovid);
     }
 }
