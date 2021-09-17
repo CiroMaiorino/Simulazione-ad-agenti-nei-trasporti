@@ -17,7 +17,7 @@ public class GameControl : MonoBehaviour
     /// <summary>
     /// Percantage of initial contagious agent
     /// </summary>
-    [SerializeField, Range(0, 100)] int ContagiousPercentage;
+    [Range(0, 100)] public int ContagiousPercentage;
    [SerializeField] int aTot, aCont, aH, aInf;
 
     public int ATot { get => aTot; set => aTot = value; }
@@ -28,6 +28,7 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
+
         if(resetGames)
          PlayerPrefs.SetInt("TimesLaunched", 0);
         PlayerPrefs.SetInt("TimesLaunched", PlayerPrefs.GetInt("TimesLaunched") + 1);
@@ -36,8 +37,6 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        
-      
         stops = Utility<Transform>.GetAllChildren(busStops);
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
         SpawningAtStops();
@@ -78,12 +77,14 @@ public class GameControl : MonoBehaviour
     /// </summary>
     public void SpawningAtStops()
     {
+     
         List<SpawningArea> areas = new List<SpawningArea>();
         foreach (Transform stop in stops)
         {
             List<SpawningArea> spawnAreas=Utility<SpawningArea>.GetAllChildren(stop.gameObject);
             areas.Add(spawnAreas[0]);
             areas.Add(spawnAreas[1]);
+            
         }
         foreach (SpawningArea area in areas)
         {
@@ -92,8 +93,7 @@ public class GameControl : MonoBehaviour
 
             for (int i = 0; i < effectivePendolars; i++)
                 SpawnAgent(area);
-
-               }
+        }
     }
 
     /// <summary>
@@ -102,6 +102,7 @@ public class GameControl : MonoBehaviour
     /// <param name="area"> area where spawn the agent</param>
     private void SpawnAgent(SpawningArea area)
     {
+        
         aTot++;
         Transform stop = area.transform.parent;
         Vector3 positionChanger = new Vector3(Random.Range(-area.size.x / 2, area.size.x / 2),
