@@ -9,8 +9,8 @@ public class GameControl : MonoBehaviour
 {
     public Bus bus;
     [SerializeField] GameObject busStops;
-    [SerializeField] Agent agentPrefab;
-    private List<Transform> stops;
+    public Agent agentPrefab;
+    [HideInInspector] public List<Transform> stops;
     public CSVWriter writer;
     [SerializeField] private bool resetGames;
     [Range(0, 100)] public  int infectionPercentage;
@@ -19,12 +19,12 @@ public class GameControl : MonoBehaviour
     /// </summary>
     [Range(0, 100)] public int ContagiousPercentage;
    [SerializeField] int aTot, aCont, aH, aInf;
-
+    int pathLength;
     public int ATot { get => aTot; set => aTot = value; }
     public int ACont { get => aCont; set => aCont = value; }
     public int AH { get => aH; set => aH = value; }
     public int AInf { get => aInf; set => aInf = value; }
-    
+    public int PathLength { get => pathLength; set => pathLength = value; }
 
     private void Awake()
     {
@@ -32,12 +32,13 @@ public class GameControl : MonoBehaviour
         if(resetGames)
          PlayerPrefs.SetInt("TimesLaunched", 0);
         PlayerPrefs.SetInt("TimesLaunched", PlayerPrefs.GetInt("TimesLaunched") + 1);
-        
+        stops = Utility<Transform>.GetAllChildren(busStops);
+
     }
 
     void Start()
     {
-        stops = Utility<Transform>.GetAllChildren(busStops);
+       
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
         int timesLaunched = PlayerPrefs.GetInt("TimesLaunched");
         writer = new CSVWriter(this,"stat"+timesLaunched+".csv");
@@ -112,7 +113,7 @@ public class GameControl : MonoBehaviour
         int stopNumber= System.Int32.Parse(Regex.Match(stop.name, @"\d+$").Value);
         if(area.gameObject.name.EndsWith("R"))
         {
-            int number = (Mathf.Abs(stopNumber - Random.Range(1, 4)));
+            int number = (Mathf.Abs(stopNumber - Random.Range(1, pathLength+1)));
             if (number == 0)
                 agentPrefab.Mystop = number + 1;
             else if (number == 8 || number == 6)
@@ -121,7 +122,7 @@ public class GameControl : MonoBehaviour
         }
 
         else 
-            agentPrefab.Mystop = ((stopNumber + Random.Range(0, 3)) % stops.Count)+1;
+            agentPrefab.Mystop = ((stopNumber + Random.Range(0, pathLength)) % stops.Count)+1;
        
         if (Utility<Transform>.Infected(ContagiousPercentage))
         {

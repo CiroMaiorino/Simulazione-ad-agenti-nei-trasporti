@@ -7,7 +7,7 @@ public class GuiControl : MonoBehaviour
     public Button b05f, b1, b2, b3,b5,pause,play;
     public Text aTot, aCont, aH, aInf;
     public GameObject clock;
-    public Slider infectionsPercentage,contagionsPercentage;
+    public Slider infectionsPercentage,contagionsPercentage,spredingRange,maxPath;
     private GameControl gameControl;
     
     void Start()
@@ -22,12 +22,15 @@ public class GuiControl : MonoBehaviour
         b5.onClick.AddListener(() => Time.timeScale = 5);
         pause.onClick.AddListener(() => Pause());
         gameControl = FindObjectOfType<GameControl>();
+        maxPath.maxValue = gameControl.stops.Count;
     }
 
     void setPausedUI(bool active)
     {
         infectionsPercentage.gameObject.SetActive(active);
         contagionsPercentage.gameObject.SetActive(active);
+        spredingRange.gameObject.SetActive(active);
+        maxPath.gameObject.SetActive(active);
         play.gameObject.SetActive(active);
     }
 
@@ -50,8 +53,9 @@ public class GuiControl : MonoBehaviour
         setPausedUI(false);
         Time.timeScale = 1f;
         SetPlayUI(true);
-       
-        
+        var covid=gameControl.agentPrefab.GetComponentInChildren<Illness>().GetComponentInChildren<ParticleSystem>().shape;
+        covid.angle = spredingRange.value;
+        gameControl.PathLength = (int)maxPath.value;
         gameControl.infectionPercentage = (int)infectionsPercentage.value;
         gameControl.ContagiousPercentage = (int)contagionsPercentage.value;
     }
