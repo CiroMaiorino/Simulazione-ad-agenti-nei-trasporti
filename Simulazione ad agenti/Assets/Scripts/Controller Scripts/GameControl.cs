@@ -39,7 +39,6 @@ public class GameControl : MonoBehaviour
     {
         stops = Utility<Transform>.GetAllChildren(busStops);
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
-        SpawningAtStops();
         int timesLaunched = PlayerPrefs.GetInt("TimesLaunched");
         writer = new CSVWriter(this,"stat"+timesLaunched+".csv");
         writer.createFile();

@@ -13,7 +13,7 @@ public class Stop : MonoBehaviour
     private List<Agent> pendular;
     private GameObject busStop;
     private GameControl gameControl;
-    private int runNumber =1;
+    private int runNumber =0;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +36,8 @@ public class Stop : MonoBehaviour
         }
         if (colliderTag == "NewRun")
         {
-            gameControl.writer.writeStat();
+            if(runNumber!=0)
+                gameControl.writer.writeStat();
             gameControl.ResetStats();
             
 

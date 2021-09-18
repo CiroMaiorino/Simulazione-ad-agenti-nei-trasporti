@@ -54,8 +54,6 @@ public class GuiControl : MonoBehaviour
         
         gameControl.infectionPercentage = (int)infectionsPercentage.value;
         gameControl.ContagiousPercentage = (int)contagionsPercentage.value;
-
-        gameControl.SpawningAtStops();
     }
 
     void Pause()
