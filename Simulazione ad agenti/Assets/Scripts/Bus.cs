@@ -30,6 +30,7 @@ public class Bus : MonoBehaviour
     private GameObject passengers;
     private GridGraph gridGraph;
     private bool returning;
+    public bool waiting;
     public Target Exit { get => exit;}
     public List<Target> Seats { get => seats; set => seats = value; }
     public GameObject Passengers { get => passengers; set => passengers = value; }
@@ -44,11 +45,13 @@ public class Bus : MonoBehaviour
         ramp.SetActive(false);
         Passengers = GameObject.Find("Passengers");
         returning = false;
+        waiting = false;
     }
   
   
     public void StopEngine()
     {
+        waiting = true;
         isMooving = false;
         GetComponent<PathFollower>().speed = 0;
         gridGraph.center = Vector3.Scale(transform.position,new Vector3(1,0,1));
@@ -59,12 +62,25 @@ public class Bus : MonoBehaviour
 
     public void StartEngine()
     {
+        waiting = false;
         StartCoroutine("StartEngineCuroutine");
+        foreach (Agent a in Utility<Agent>.GetAllChildren(Passengers))
+        {
+            if (a.State == Agent.States.Contagious)
+            {
+                var particleSpeed1 = a.GetComponentInChildren<Illness>().GetComponentsInChildren<ParticleSystem>()[0].main;
+                var particleSpeed2 = a.GetComponentInChildren<Illness>().GetComponentsInChildren<ParticleSystem>()[1].main;
+                particleSpeed1.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
+                particleSpeed2.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
+            }
+        }
     }
     private IEnumerator StartEngineCuroutine()
     {
         yield return new WaitForSeconds(4f);
         isMooving = true;
+
+
         GetComponent<PathFollower>().speed =getArea().restartSpeed;
         ramp.SetActive(false);
         

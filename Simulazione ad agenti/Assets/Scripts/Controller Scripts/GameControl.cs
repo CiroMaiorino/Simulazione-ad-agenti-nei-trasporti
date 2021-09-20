@@ -51,7 +51,7 @@ public class GameControl : MonoBehaviour
     {
         int actualPassengersNumber = Utility<Agent>.GetAllChildren(bus.Passengers).Count;
         if (bus.GetComponent<PathFollower>().speed == 0)
-            if ((Utility<Agent>.GetAllChildren(bus.getArea().gameObject).Count == 0 || actualPassengersNumber == bus.maxPassengers) && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers)))
+            if ((Utility<Agent>.GetAllChildren(bus.getArea().gameObject).Count == 0 || actualPassengersNumber == bus.maxPassengers) && CanStart(Utility<Agent>.GetAllChildren(bus.Passengers))&& bus.waiting)
                 bus.StartEngine();
         TimeInputs();
     }
