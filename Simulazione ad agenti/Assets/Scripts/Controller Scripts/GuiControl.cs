@@ -7,7 +7,8 @@ public class GuiControl : MonoBehaviour
     public Button b05f, b1, b2, b3,b5,pause,play;
     public Text aTot, aCont, aH, aInf;
     public GameObject clock;
-    public Slider infectionsPercentage,contagionsPercentage,spredingRange,maxPath;
+    public Slider infectionsPercentage,contagionsPercentage,spredingRange,maxPath,agentsNumber;
+    public Dropdown stops, AR;
     private GameControl gameControl;
     
     void Start()
@@ -23,6 +24,15 @@ public class GuiControl : MonoBehaviour
         pause.onClick.AddListener(() => Pause());
         gameControl = FindObjectOfType<GameControl>();
         maxPath.maxValue = gameControl.stops.Count;
+        foreach(Transform stop in gameControl.stops)
+        {
+            stops.options.Add(new Dropdown.OptionData() { text = stop.name });
+        }      
+        stops.onValueChanged.AddListener(delegate { DropdownValueChanged();});
+        stops.RefreshShownValue();
+        DropdownValueChanged();
+        agentsNumber.onValueChanged.AddListener(delegate { PendularValueChanged(); });
+
     }
 
     void setPausedUI(bool active)
@@ -32,6 +42,9 @@ public class GuiControl : MonoBehaviour
         spredingRange.gameObject.SetActive(active);
         maxPath.gameObject.SetActive(active);
         play.gameObject.SetActive(active);
+        stops.gameObject.SetActive(active);
+        AR.gameObject.SetActive(active);
+        agentsNumber.gameObject.SetActive(active);
     }
 
     private void SetPlayUI(bool active)
@@ -77,4 +90,19 @@ public class GuiControl : MonoBehaviour
             aInf.text = "Agenti Infettati:" + gameControl.AInf;
            }
     }
+
+    void DropdownValueChanged()
+    {
+        SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
+        agentsNumber.value = area.AvaragePendolars;
+        Debug.LogError(area.AvaragePendolars);
+    }
+    void PendularValueChanged()
+    {
+        SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
+       // Debug.LogError(area.AvaragePendolars);
+        agentsNumber.value = area.AvaragePendolars;
+        area.AvaragePendolars = AR.value;
+    }
+
 }
