@@ -243,7 +243,7 @@ MonoBehaviour:
   bus: {fileID: 0}
   target: {fileID: 0}
   State: 2
-  mystop: 5
+  mystop: 7
 --- !u!1 &8523551530620708483
 GameObject:
   m_ObjectHideFlags: 0

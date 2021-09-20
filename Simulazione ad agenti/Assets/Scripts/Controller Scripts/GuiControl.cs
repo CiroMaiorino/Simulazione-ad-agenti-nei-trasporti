@@ -95,14 +95,11 @@ public class GuiControl : MonoBehaviour
     {
         SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
         agentsNumber.value = area.AvaragePendolars;
-        Debug.LogError(area.AvaragePendolars);
     }
     void PendularValueChanged()
     {
         SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
-       // Debug.LogError(area.AvaragePendolars);
-        agentsNumber.value = area.AvaragePendolars;
-        area.AvaragePendolars = AR.value;
+        area.AvaragePendolars = (int) agentsNumber.value;
     }
 
 }
