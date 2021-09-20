@@ -242,8 +242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bus: {fileID: 0}
   target: {fileID: 0}
-  State: 0
-  mystop: 7
+  State: 2
+  mystop: 5
 --- !u!1 &8523551530620708483
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9659259
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalRotation.x
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.258819
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalRotation.z
@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 263589455636972623, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

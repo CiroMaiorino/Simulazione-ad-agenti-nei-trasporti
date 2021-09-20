@@ -18,8 +18,9 @@ public class GameControl : MonoBehaviour
     /// Percantage of initial contagious agent
     /// </summary>
     [Range(0, 100)] public int ContagiousPercentage;
-   [SerializeField] int aTot, aCont, aH, aInf;
+    [SerializeField] int aTot, aCont, aH, aInf;
     int pathLength;
+
     public int ATot { get => aTot; set => aTot = value; }
     public int ACont { get => aCont; set => aCont = value; }
     public int AH { get => aH; set => aH = value; }
@@ -38,11 +39,11 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-       
         Stop stop = Utility<Stop>.GetAllChildren(bus.gameObject.transform.Find("Wheels").gameObject)[0];
         int timesLaunched = PlayerPrefs.GetInt("TimesLaunched");
         writer = new CSVWriter(this,"stat"+timesLaunched+".csv");
         writer.createFile();
+
     }
 
    
@@ -191,4 +192,5 @@ public class GameControl : MonoBehaviour
         aInf = 0;
         aTot = 0;
     }
+
 }
