@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Prova : MonoBehaviour
+public class Getdown : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

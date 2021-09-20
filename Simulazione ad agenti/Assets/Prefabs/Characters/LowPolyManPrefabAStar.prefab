@@ -391,6 +391,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 793105856872454286, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 793105856872454286, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
+      propertyPath: ShapeModule.alignToDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 793105856872454286, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 793105856872454286, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: ShapeModule.randomPositionAmount
       value: 0
       objectReference: {fileID: 0}
@@ -405,6 +417,10 @@ PrefabInstance:
     - target: {fileID: 857811566091651123, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
       propertyPath: m_Name
       value: Covid Machine-Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123328202532032460, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9f38d5ce222c5d4d8d42234594bb356, type: 3}
