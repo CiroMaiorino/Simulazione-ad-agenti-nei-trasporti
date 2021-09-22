@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
+
 public class GuiControl : MonoBehaviour
 {
     public Button b05f, b1, b2, b3,b5,pause,play;
     public Text aTot, aCont, aH, aInf;
     public GameObject clock;
-    public Slider infectionsPercentage,contagionsPercentage,spredingRange,maxPath,agentsNumber;
+    public Slider infectionsPercentage,contagionsPercentage,spredingRange,maxPath,agentsNumber,emissionAngle;
     public Dropdown stops, AR;
     private GameControl gameControl;
     
@@ -26,12 +28,14 @@ public class GuiControl : MonoBehaviour
         maxPath.maxValue = gameControl.stops.Count;
         foreach(Transform stop in gameControl.stops)
         {
-            stops.options.Add(new Dropdown.OptionData() { text = stop.name });
+            string stopNumber = Regex.Match(stop.name, @"\d+$").Value;
+            stops.options.Add(new Dropdown.OptionData() { text = "Fermata "+ stopNumber });
         }      
         stops.onValueChanged.AddListener(delegate { DropdownValueChanged();});
         stops.RefreshShownValue();
         DropdownValueChanged();
         agentsNumber.onValueChanged.AddListener(delegate { PendularValueChanged(); });
+        AR.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
     }
 
@@ -45,6 +49,7 @@ public class GuiControl : MonoBehaviour
         stops.gameObject.SetActive(active);
         AR.gameObject.SetActive(active);
         agentsNumber.gameObject.SetActive(active);
+        emissionAngle.gameObject.SetActive(active);
     }
 
     private void SetPlayUI(bool active)
@@ -60,6 +65,7 @@ public class GuiControl : MonoBehaviour
         aCont.gameObject.SetActive(active);
         aH.gameObject.SetActive(active);
         aInf.gameObject.SetActive(active);
+        
     }
     void Play()
     {
@@ -71,6 +77,7 @@ public class GuiControl : MonoBehaviour
         gameControl.PathLength = (int)maxPath.value;
         gameControl.infectionPercentage = (int)infectionsPercentage.value;
         gameControl.ContagiousPercentage = (int)contagionsPercentage.value;
+        Illness.EmissionAngle = (int) emissionAngle.value;
     }
 
     void Pause()

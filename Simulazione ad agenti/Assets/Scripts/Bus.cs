@@ -70,8 +70,8 @@ public class Bus : MonoBehaviour
             {
                 var particleSpeed1 = a.GetComponentInChildren<Illness>().GetComponentsInChildren<ParticleSystem>()[0].main;
                 var particleSpeed2 = a.GetComponentInChildren<Illness>().GetComponentsInChildren<ParticleSystem>()[1].main;
-                particleSpeed1.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
-                particleSpeed2.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed;
+                particleSpeed1.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed+1.5f;
+                particleSpeed2.startSpeed = currentStop.GetComponentInChildren<SpawningArea>().restartSpeed+1.5f;
             }
         }
     }
