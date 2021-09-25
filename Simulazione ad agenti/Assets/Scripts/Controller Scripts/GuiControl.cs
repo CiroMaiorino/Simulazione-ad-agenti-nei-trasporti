@@ -101,12 +101,12 @@ public class GuiControl : MonoBehaviour
     void DropdownValueChanged()
     {
         SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
-        agentsNumber.value = area.AvaragePendolars;
+        agentsNumber.value = area.AvaragePendulars;
     }
     void PendularValueChanged()
     {
         SpawningArea area = gameControl.stops[stops.value].GetComponentsInChildren<SpawningArea>()[AR.value];
-        area.AvaragePendolars = (int) agentsNumber.value;
+        area.AvaragePendulars = (int) agentsNumber.value;
     }
 
 }

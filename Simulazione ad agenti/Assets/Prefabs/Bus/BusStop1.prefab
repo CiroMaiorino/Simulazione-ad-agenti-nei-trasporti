@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 5, y: 1, z: 10}
-  avaragePendolars: 0
+  averagePendolars: 0
   restartSpeed: 0
 --- !u!1 &2984283321639421125
 GameObject:
@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &73900965554875664
 Transform:
   m_ObjectHideFlags: 0

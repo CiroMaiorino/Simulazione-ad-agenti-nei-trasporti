@@ -90,7 +90,7 @@ public class GameControl : MonoBehaviour
         foreach (SpawningArea area in areas)
         {
             
-            int effectivePendolars = Random.Range(area.AvaragePendolars - area.AvaragePendolars * 30 / 100, area.AvaragePendolars + area.AvaragePendolars * 30 / 100);
+            int effectivePendolars = Random.Range(area.AvaragePendulars - area.AvaragePendulars * 30 / 100, area.AvaragePendulars + area.AvaragePendulars * 30 / 100);
 
             for (int i = 0; i < effectivePendolars; i++)
                 SpawnAgent(area);
