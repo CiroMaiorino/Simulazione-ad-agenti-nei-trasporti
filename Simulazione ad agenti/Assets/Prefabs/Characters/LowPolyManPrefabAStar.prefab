@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b8c0ade6e2b34408efa39b6003107d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfectionPercentage: 100
+  InfectionPercentage: 25
 --- !u!136 &751827925
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bus: {fileID: 0}
   target: {fileID: 0}
-  State: 2
+  State: 0
   mystop: 7
 --- !u!1 &8523551530620708483
 GameObject:
